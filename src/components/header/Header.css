@@ -1,0 +1,16 @@
+.add-business-button {
+    background-color:#0F9D58 !important;
+    color:white !important;
+    font-weight:bold !important;
+    border-radius: 15px !important;
+}
+.Search-field {
+    background: #F5F5F5 !important;
+    border-radius: 15px !important;
+}
+.navbar-styles {
+    background-color: white;
+}
+.search-icon {
+    color: #7E7E7E;
+}
