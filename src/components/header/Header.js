@@ -8,24 +8,25 @@ import './Header.css';
 
 function Header() {
   return (
-    <Navbar bg="light">
+    <Navbar className="navbar-styles mb-2">
     <Container>
         <Row className="w-100">
-            <Col sm={3}>
-              <Navbar.Brand href="/home">Victory Ads</Navbar.Brand>
+            <Col sm={2}>
+              <Navbar.Brand href="/home"><span style={{fontWeight:"bold"}}>Victory Ads</span></Navbar.Brand>
             </Col>
-            <Col sm={4}>
+            <Col sm={5}>
               <Input
                 fullWidth={true}
+                className="Search-field p-1"
                 disableUnderline={true}
                 startAdornment={
                   <InputAdornment position="start">
-                    <SearchIcon></SearchIcon>
+                    <SearchIcon className="search-icon"></SearchIcon>
                   </InputAdornment>
                 }/>
             </Col>
             <Col sm={5}>
-            <Button variant="contained" className="add-business-button" size="large" startIcon={<AddIcon></AddIcon>}>
+            <Button variant="contained" placeholder="Search" className="add-business-button" size="large" startIcon={<AddIcon></AddIcon>}>
               Add Business
             </Button>
             </Col>
