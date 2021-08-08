@@ -1,6 +1,7 @@
 .business-name {
     font-size: 18px;
     float: left;
+    text-align: left;
     font-weight: bold;
     color:#0F9D58 !important;
 }

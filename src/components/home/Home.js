@@ -1,15 +1,15 @@
-import './About.css';
+import './Home.css';
 import { Component } from "react";
 
-class About extends Component {
+class Home extends Component {
   constructor(){
     super();
   }
   render(){
     return(
-      <h1>About page</h1>
+      <h1>Home page</h1>
     )
   }
 }
 
-export default About;
+export default Home;

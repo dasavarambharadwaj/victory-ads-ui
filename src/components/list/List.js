@@ -26,7 +26,7 @@ class List extends Component {
             anchorElLocation : {},
             anchorElTiming:{},
             listOfCustomers : [],
-            searchStringValue:""
+            searchString:""
         };
         this.props = {
             searchString:""
@@ -95,13 +95,14 @@ class List extends Component {
     async getCustomerData(){
         try {
             let service = new services();
-            let data= await service.get("http://localhost:3000/customers",{search:this.props.searchString});
-            this.setState({
+            let data= await service.get(window.appConfig.backendUrl+"/customers",{search:this.props.searchString});
+            await this.setState({
                 listOfCustomers:data.data,
                 anchorElEmail:new Array(data.data.length).fill(null),
                 anchorElPerson:new Array(data.data.length).fill(null),
                 openEmail : {},
                 openPerson : {},
+                searchString : this.props.searchString,
             });
         }
         catch(e) {
@@ -116,6 +117,11 @@ class List extends Component {
     }
     async componentDidMount() {
         await this.getCustomerData();
+    }
+    async componentDidUpdate() {
+        if(this.state.searchString !== this.props.searchString){
+            await this.getCustomerData();
+        }
     }
     render() {
         return (

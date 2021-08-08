@@ -6,20 +6,21 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import Input from '@material-ui/core/Input';
 import './Header.css';
 import { Component } from "react";
+import { Link } from "react-router-dom";
 
 class Header extends Component {
   constructor(){
     super();
     this.state = {
-      searchValue:""
     }
     this.props = {
       searchStringChanged:null
     }
   }
+  searchTimeout=null;
   searchValueChanged(e){
-    this.setState({searchValue:e.target.value})
-    this.props.searchStringChanged(e.target.value);
+      clearTimeout(this.searchTimeout)
+    this.searchTimeout = setTimeout(()=>{this.props.searchStringChanged(e.target.value)},500);
   }
   render(){
     return(
@@ -27,14 +28,13 @@ class Header extends Component {
         <Container>
             <Row className="w-100">
                 <Col sm={2}>
-                  <Navbar.Brand href="/home"><span style={{fontWeight:"bold"}}>Victory Ads</span></Navbar.Brand>
+                  <Navbar.Brand ><Link to="/" className="remove-link-styles"><span style={{fontWeight:"bold",fontSize:"1.4em"}}>Victory Ads</span></Link></Navbar.Brand>
                 </Col>
                 <Col sm={5}>
                   <Input
                     fullWidth={true}
                     className="Search-field p-1"
                     disableUnderline={true}
-                    value={this.state.searchValue}
                     onChange={(e)=>this.searchValueChanged(e)}
                     startAdornment={
                       <InputAdornment position="start">
@@ -43,8 +43,8 @@ class Header extends Component {
                     }/>
                 </Col>
                 <Col sm={5}>
-                <Button variant="contained" placeholder="Search" className="add-business-button" size="large" startIcon={<AddIcon></AddIcon>}>
-                  Add Business
+                <Button variant="contained" onClick={()=>{window.globalRouter.push("/add-business")}} placeholder="Search" className="add-business-button" size="large" startIcon={<AddIcon></AddIcon>}>
+                  Add Your Business
                 </Button>
                 </Col>
             </Row>
