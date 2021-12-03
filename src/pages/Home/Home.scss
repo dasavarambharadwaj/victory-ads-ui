@@ -1,0 +1,14 @@
+.search-field, .search-field:hover, .search-field:active, .search-field:link, .search-field:focus {
+  background-color: white;
+  border-radius: 15px !important;
+  width: 100%;
+  fieldset {
+    border: none;
+    border-radius: 15px;
+  }
+}
+#search-popup {
+  .MuiPopover-paper {
+    border-radius: 15px;
+  }
+}
