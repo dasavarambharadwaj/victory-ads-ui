@@ -1,10 +1,6 @@
-import {
-    BrowserRouter,
-    Route,
-    Routes
-} from 'react-router-dom';
-import Home from '../pages/Home'
-import AddBusiness from '../pages/AddBusiness'
+import { Route, Routes } from "react-router-dom";
+import Home from "../pages/Home";
+import AddBusiness from "../pages/AddBusiness";
 const AppRouter = () => {
   return (
     <Routes>
@@ -12,5 +8,5 @@ const AppRouter = () => {
       <Route path="/create" element={<AddBusiness />} />
     </Routes>
   );
-}
-export default AppRouter
+};
+export default AppRouter;
