@@ -1,7 +1,7 @@
 import "./App.scss";
 import Header from "./components/Header";
 import AppRouter from "./routes";
-import { BrowserRouter, Routes } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 function App() {
   return (
     <div className="container">

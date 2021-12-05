@@ -12,3 +12,15 @@
     border-radius: 15px;
   }
 }
+.popover-results-container { 
+  max-height: 30vh;
+  overflow: overlay;
+}
+.category-box {
+  color: white;
+  border-radius: 30px;
+  background-color: #f59f00;
+}
+.category-box-hospital {
+  background-color: #37b24d !important;
+}
