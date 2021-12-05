@@ -16,3 +16,14 @@
 .fs-6 {
     font-size: 2.4rem !important;
 }
+.white-field {
+    input {
+        color: white;
+    }
+    label {
+        color: white;
+    }
+    fieldset {
+        border-color: white;
+    }
+}
