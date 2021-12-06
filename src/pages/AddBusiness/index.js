@@ -1,7 +1,6 @@
-import TextField from "@mui/material/TextField";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Stack from "@mui/material/Stack";
+import { TextField, Button, Box, Grid, Paper } from "@mui/material";
+import { styled } from "@mui/material/styles";
+
 import { useState } from "react";
 
 function AddBusiness() {
@@ -10,9 +9,16 @@ function AddBusiness() {
   const [mobileNumber, setMobileNumber] = useState("");
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
+  const [errors, setErrors] = useState({ err: "" });
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (businessName === "") {
+      let err = errors;
+      err.businessName = "value is required";
+    }
+    console.log("hello");
+
     const customer = {
       businessName,
       businessType,
@@ -20,56 +26,90 @@ function AddBusiness() {
       email,
       address,
     };
-
-    
+  };
+  const checkRequiredValidations = (value, key) => {
+    const err = errors;
+    if (value === "") {
+      err[key] = "value is required";
+      setErrors(err);
+    } else {
+      err[key] = "";
+      setErrors(err);
+    }
   };
   return (
     <>
       <h3 className="text-center">Add Business</h3>
-      <div className="d-flex justify-content-center">
-        <form className="d-flex mt-3 flex-column">
-          <div className="d-flex justify-content-around mb-4 gap-5">
+      <form onSubmit={handleSubmit} autocomplete="off">
+        <Grid
+          container
+          // maxWidth="sm"
+          // text-center
+          spacing={2}
+          className="w-75 mx-auto"
+          // direction="row"
+          // justifyContent="center"
+          // alignItems="center"
+        >
+          <Grid item xs={12} md={6}>
             <TextField
+              autoCompleteOff
+              error={errors["businessName"] !== ""}
               id="outlined-basic"
-              className="white-field"
+              className="white-field w-100"
               label="Business Name"
               variant="outlined"
+              name="businessName"
               value={businessName}
-              onChange={(e) => setBusinessName(e.target.value)}
+              helperText={errors.businessName}
+              onChange={(e) => {
+                setBusinessName(e.target.value);
+                checkRequiredValidations(e.target.value, e.target.name);
+              }}
             />
+          </Grid>
+          <Grid item xs={12} md={6}>
             <TextField
+              // error
               id="outlined-basic"
               label="Business Type"
               variant="outlined"
-              className="white-field"
+              className="white-field w-100"
+              name="businessType"
               value={businessType}
-              onChange={(e) => setBusinessType(this.target.value)}
+              onChange={(e) => setBusinessType(e.target.value)}
             />
-          </div>
-          <div className="d-flex justify-content-around mb-4 gap-5">
+          </Grid>
+          <Grid item xs={12} md={6}>
             <TextField
+              // error
+
               id="outlined-basic"
-              className="white-field"
+              className="white-field w-100"
               label="Mobile Number"
               variant="outlined"
               type="number"
               value={mobileNumber}
-              onChange={(e) => setMobileNumber(this.target.value)}
+              onChange={(e) => setMobileNumber(e.target.value)}
             />
+          </Grid>
+          <Grid item xs={12} md={6}>
             <TextField
+              // error
               id="outlined-basic"
-              className="white-field"
+              className="white-field w-100"
               label="Email"
               variant="outlined"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-          </div>
-          <div className="d-flex justify-content-around mb-4">
+          </Grid>
+          <Grid item xs={12} md={12}>
             <TextField
+              // error
               fullWidth
               id="outlined-basic"
-              className="white-field"
+              className="white-field w-100"
               label="Address"
               variant="outlined"
               multiline
@@ -77,26 +117,12 @@ function AddBusiness() {
               value={address}
               onChange={(e) => setAddress(e.target.value)}
             />
-          </div>
-          <div className="border p-4 mb-2">
-            {/* <Stack direction="row" spacing={8}> */}
-            <h6 className="text-center mb-3">Services</h6>
-            <TextField
-              id="outlined-basic"
-              className="white-field"
-              label="Add Your Service"
-              variant="outlined"
-              size="small"
-            />
-            {/* </Stack> */}
-          </div>
-          <div className="text-center">
-            <Button variant="outlined" onClick={handleSubmit}>
-              Submit
-            </Button>
-          </div>
-        </form>
-      </div>
+          </Grid>
+          <Button variant="contained" color="primary" type="submit">
+            Submit
+          </Button>
+        </Grid>
+      </form>
     </>
   );
 }
