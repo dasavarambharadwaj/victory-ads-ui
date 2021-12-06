@@ -34,14 +34,14 @@ function Home() {
       setDebounceTimeoutHandle(
         setTimeout(async () => {
           let result = await apiServices.get(
-            "http://localhost:3001/customers",
+            process.env.REACT_APP_BACKEND_URL + "/customers",
             { search: event.target.value }
           );
           setLoading(false);
           setNoData(result.data.length === 0);
           setSearchResults(result.data);
           setOpen(true);
-        }, 1000)
+        }, 300)
       );
     } else {
       setNoData(false);
@@ -83,15 +83,15 @@ function Home() {
             className="popover-results-container p-2"
           >
             {noData ? (
-              <div class="d-flex">
-                <span className="mx-auto">No Data</span>
+              <div className="d-flex">
+                <span className="mx-auto">{window.configJson.noDataMessage}</span>
               </div>
             ) : loading ? (
-              <div class="d-flex">
+              <div className="d-flex">
                 <CircularProgress className="mx-auto" />
               </div>
             ) : searchResults.length === 0 ? (
-              <div class="d-flex">
+              <div className="d-flex">
                 <span className="mx-auto">Search for business</span>
               </div>
             ) : (
