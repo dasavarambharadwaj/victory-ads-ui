@@ -1,17 +1,14 @@
 import {
   TextField,
   Button,
-  Box,
   Grid,
-  Paper,
   InputAdornment,
   MenuItem,
 } from "@mui/material";
-import { styled } from "@mui/material/styles";
-
+import ApiServices from "../../services/apiServices";
 import { useState } from "react";
 
-const businessTypes = [
+const business = [
   {
     value: "Groceries",
   },
@@ -28,7 +25,7 @@ const businessTypes = [
 
 function AddBusiness() {
   const [businessName, setBusinessName] = useState("");
-  // const [businessType, setBusinessType] = useState("");
+  const [businessType, setBusinessType] = useState("");
   const [mobileNumber, setMobileNumber] = useState("");
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
@@ -36,48 +33,39 @@ function AddBusiness() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (businessName === "") {
-      let err = errors;
-      err.businessName = "value is required";
+    if (!businessName && !businessType && !mobileNumber && !email && !address) {
+      setErrors({
+        businessName: "please enter a  correct name",
+        mobileNumber: "please enter a  correct number",
+        email: "please enter a correct Email",
+        address: "please enter a your address",
+      });
+      console.log("error");
+    } else {
+      console.log({ businessName, businessType, mobileNumber, email, address });
+      // setTimeout(async () => {
+      //   await ApiServices.post("http://localhost:3001/customers", {
+      //     businessName,
+      //     businessType,
+      //     mobileNumber,
+      //     email,
+      //     address,
+      //   });
+      // }, 1000);
     }
-    console.log("hello");
-
-    // const customer = {
-    //   businessName,
-    //   businessType,
-    //   mobileNumber,
-    //   email,
-    //   address,
-    // };
+    setBusinessName("");
+    setBusinessType("");
+    setMobileNumber("");
+    setEmail("");
+    setAddress("");
   };
-  // const checkRequiredValidations = (value, key) => {
-  //   const err = errors;
-  //   if (value === "") {
-  //     err[key] = "value is required";
-  //     setErrors(err);
-  //   } else {
-  //     err[key] = "";
-  //     setErrors(err);
-  //   }
-  // };
   return (
     <>
       <h3 className="text-center">Add Business</h3>
-      <form onSubmit={handleSubmit} autocomplete="off">
-        <Grid
-          container
-          // maxWidth="sm"
-          // text-center
-          spacing={2}
-          className="w-75 mx-auto"
-          // direction="row"
-          // justifyContent="center"
-          // alignItems="center"
-        >
+      <form onSubmit={handleSubmit} autoComplete="off">
+        <Grid container spacing={2} className="w-75 mx-auto">
           <Grid item xs={12} md={6}>
             <TextField
-              // error={errors["businessName"] !== ""}
               error={Boolean(errors?.businessName)}
               helperText={errors?.businessName}
               id="outlined-basic"
@@ -86,39 +74,32 @@ function AddBusiness() {
               variant="outlined"
               name="businessName"
               value={businessName}
-              // helperText={errors.businessName}
-              // onChange={(e) => {
-              //   setErrors("");
-              //   setBusinessName(e.target.value);
-              //   // checkRequiredValidations(e.target.value, e.target.name);
-              // }}
               onChange={(e) => {
-                setErrors("");
+                setErrors({ businessName: "" });
                 setBusinessName(e.target.value);
                 const reg = new RegExp(/^[a-zA-Z'-]+$/).test(e.target.value);
                 console.log(reg);
                 if (!reg) {
                   setErrors({ businessName: "please enter a  correct name" });
-                  console.log(e.target.value);
                 }
-                // checkRequiredValidations(e.target.value, e.target.name);
               }}
             />
           </Grid>
           <Grid item xs={12} md={6}>
             <TextField
-              // error
               id="outlined-basic"
-              // label="Business Type"
               select
               label="Select Business Type"
               variant="outlined"
               className="white-field w-100"
               name="businessType"
-              // value={businessType}
-              // onChange={(e) => setBusinessType(e.target.value)}
+              value={businessType}
+              onChange={(e) => {
+                setBusinessType(e.target.value);
+                console.log(e.target.value);
+              }}
             >
-              {businessTypes.map((option) => (
+              {business.map((option) => (
                 <MenuItem value={option.value} className="white-field">
                   {option.value}
                 </MenuItem>
@@ -127,14 +108,12 @@ function AddBusiness() {
           </Grid>
           <Grid item xs={12} md={6}>
             <TextField
-              // error
               error={Boolean(errors?.mobileNumber)}
               helperText={errors?.mobileNumber}
               id="outlined-basic"
               className="white-field w-100"
               label="Mobile Number"
               variant="outlined"
-              // type="number"
               value={mobileNumber}
               InputProps={{
                 startAdornment: (
@@ -150,15 +129,12 @@ function AddBusiness() {
                 console.log(reg);
                 if (!reg) {
                   setErrors({ mobileNumber: "please enter a  correct number" });
-                  console.log(e.target.value);
                 }
-                // checkRequiredValidations(e.target.value, e.target.name);
               }}
             />
           </Grid>
           <Grid item xs={12} md={6}>
             <TextField
-              // error
               error={Boolean(errors?.email)}
               helperText={errors?.email}
               id="outlined-basic"
@@ -168,7 +144,7 @@ function AddBusiness() {
               variant="outlined"
               value={email}
               onChange={(e) => {
-                setErrors("");
+                setErrors({ email: "" });
                 setEmail(e.target.value);
                 // const reg = new RegExp(
                 //   /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
@@ -178,7 +154,6 @@ function AddBusiness() {
                 //   setErrors({ email: "please enter a correct Email" });
                 //   console.log(e.target.value);
                 // }
-                // checkRequiredValidations(e.target.value, e.target.name);
               }}
               onBlur={(e) => {
                 const reg = new RegExp(
@@ -187,14 +162,14 @@ function AddBusiness() {
                 console.log(reg);
                 if (!reg) {
                   setErrors({ email: "please enter a correct Email" });
-                  console.log(e.target.value);
                 }
               }}
             />
           </Grid>
           <Grid item xs={12} md={12}>
             <TextField
-              // error
+              error={Boolean(errors?.address)}
+              helperText={errors?.address}
               fullWidth
               id="outlined-basic"
               className="white-field w-100"
@@ -203,17 +178,27 @@ function AddBusiness() {
               multiline
               rows={2}
               value={address}
-              onChange={(e) => setAddress(e.target.value)}
+              // onChange={(e) => {
+              //   setAddress(e.target.value);
+              // }}
+              onChange={(e) => {
+                setErrors({ address: "" });
+                setAddress(e.target.value);
+                const reg = new RegExp(/^[a-zA-Z0-9\s,'-]*$/).test(
+                  e.target.value
+                );
+                console.log(reg);
+                if (!reg) {
+                  setErrors({ address: "please enter a your address" });
+                }
+              }}
             />
           </Grid>
           <Grid item md={12} className="text-center">
-            {/* <div className="d-flex justify-content-center"> */}
             <Button variant="contained" color="primary" type="submit">
               Submit
             </Button>
           </Grid>
-
-          {/* </div> */}
         </Grid>
       </form>
     </>
