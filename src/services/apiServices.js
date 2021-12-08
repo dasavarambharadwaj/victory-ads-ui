@@ -10,5 +10,19 @@ class ApiServices {
       console.log(error);
     }
   }
+
+  async post(url, payload) {
+    try {
+      await axios.post(
+        url,
+        { body: JSON.stringify(payload) },
+        {
+          headers: { "content-Type": "application/json" },
+        }
+      );
+    } catch (error) {
+      console.Error(error);
+    }
+  }
 }
 export default ApiServices;
