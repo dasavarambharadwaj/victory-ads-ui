@@ -5,8 +5,8 @@ import {
   InputAdornment,
   MenuItem,
 } from "@mui/material";
-import ApiServices from "../../services/apiServices";
 import { useState } from "react";
+import ApiServices from "../../services/apiServices";
 
 const business = [
   {
@@ -22,7 +22,7 @@ const business = [
     value: "others",
   },
 ];
-
+let apiServices = new ApiServices();
 function AddBusiness() {
   const [businessName, setBusinessName] = useState("");
   const [businessType, setBusinessType] = useState("");
@@ -31,38 +31,51 @@ function AddBusiness() {
   const [address, setAddress] = useState("");
   const [errors, setErrors] = useState({});
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!businessName && !businessType && !mobileNumber && !email && !address) {
-      setErrors({
-        businessName: "please enter a  correct name",
-        mobileNumber: "please enter a  correct number",
-        email: "please enter a correct Email",
-        address: "please enter a your address",
-      });
-      console.log("error");
-    } else {
-      console.log({ businessName, businessType, mobileNumber, email, address });
-      // setTimeout(async () => {
-      //   await ApiServices.post("http://localhost:3001/customers", {
-      //     businessName,
-      //     businessType,
-      //     mobileNumber,
-      //     email,
-      //     address,
-      //   });
-      // }, 1000);
+  const handleSubmit = async (e) => {
+    let object = {};
+    let emailRegex = new RegExp(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/)
+    let phoneExp = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/
+    object.email = emailRegex.test(email) ? null : "Invalid email address"
+    object.businessName = businessName ? null : "This field is required"
+    object.businessType = businessType ? null : "This field is required"
+    object.mobileNumber = mobileNumber ? phoneExp.test(mobileNumber) ? null : "Invalid mobile number" : "This field is required";
+    object.address = address ? null : "This field is required"
+    setErrors(object);
+    if (Object.keys(object).filter(key => object[key] !== null).length === 0) {
+      try {
+        let response = await apiServices.post(process.env.REACT_APP_BACKEND_URL + "/customer",
+        {
+          name: businessName,
+          category: businessType,
+          phone: [mobileNumber],
+          address: address,
+          email: email,
+          services: []
+        });
+        console.log(response)
+        if(response?.data?.acknowledged) {
+          alert("Business Added Successfully")
+        }
+      } catch(err) {
+        alert("Some Error occured");
+      }
+      
     }
-    setBusinessName("");
-    setBusinessType("");
-    setMobileNumber("");
-    setEmail("");
-    setAddress("");
   };
+  const requiredValidationOnChange = (value,name) => {
+    errors[name] = value ? null : "This field is required";
+    setErrors(errors);
+  }
+  const mobileValidationOnChange = (value,name) => {
+    let regExp = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/
+    errors[name] = value ? regExp.test(value) ? null : "Invalid mobile number" : "This field is required";
+    setErrors(errors);
+  }
+  
   return (
     <>
       <h3 className="text-center">Add Business</h3>
-      <form onSubmit={handleSubmit} autoComplete="off">
+      <form autoComplete="off">
         <Grid container spacing={2} className="w-75 mx-auto">
           <Grid item xs={12} md={6}>
             <TextField
@@ -75,18 +88,15 @@ function AddBusiness() {
               name="businessName"
               value={businessName}
               onChange={(e) => {
-                setErrors({ businessName: "" });
                 setBusinessName(e.target.value);
-                const reg = new RegExp(/^[a-zA-Z'-]+$/).test(e.target.value);
-                console.log(reg);
-                if (!reg) {
-                  setErrors({ businessName: "please enter a  correct name" });
-                }
+                requiredValidationOnChange(e.target.value,e.target.name)
               }}
             />
           </Grid>
           <Grid item xs={12} md={6}>
             <TextField
+              error={Boolean(errors?.businessType)}
+              helperText={errors?.businessType}
               id="outlined-basic"
               select
               label="Select Business Type"
@@ -96,7 +106,7 @@ function AddBusiness() {
               value={businessType}
               onChange={(e) => {
                 setBusinessType(e.target.value);
-                console.log(e.target.value);
+                requiredValidationOnChange(e.target.value,e.target.name)
               }}
             >
               {business.map((option) => (
@@ -114,6 +124,7 @@ function AddBusiness() {
               className="white-field w-100"
               label="Mobile Number"
               variant="outlined"
+              name="mobileNumber"
               value={mobileNumber}
               InputProps={{
                 startAdornment: (
@@ -123,13 +134,8 @@ function AddBusiness() {
                 ),
               }}
               onChange={(e) => {
-                setErrors({ mobileNumber: "" });
                 setMobileNumber(e.target.value);
-                const reg = new RegExp(/^\d*$/).test(e.target.value);
-                console.log(reg);
-                if (!reg) {
-                  setErrors({ mobileNumber: "please enter a  correct number" });
-                }
+                mobileValidationOnChange(e.target.value,e.target.name)
               }}
             />
           </Grid>
@@ -144,25 +150,8 @@ function AddBusiness() {
               variant="outlined"
               value={email}
               onChange={(e) => {
-                setErrors({ email: "" });
                 setEmail(e.target.value);
-                // const reg = new RegExp(
-                //   /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
-                // ).test(e.target.value);
-                // console.log(reg);
-                // if (!reg) {
-                //   setErrors({ email: "please enter a correct Email" });
-                //   console.log(e.target.value);
-                // }
-              }}
-              onBlur={(e) => {
-                const reg = new RegExp(
-                  /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
-                ).test(e.target.value);
-                console.log(reg);
-                if (!reg) {
-                  setErrors({ email: "please enter a correct Email" });
-                }
+                requiredValidationOnChange(e.target.value,e.target.name)
               }}
             />
           </Grid>
@@ -175,27 +164,18 @@ function AddBusiness() {
               className="white-field w-100"
               label="Address"
               variant="outlined"
+              name="address"
               multiline
               rows={2}
               value={address}
-              // onChange={(e) => {
-              //   setAddress(e.target.value);
-              // }}
               onChange={(e) => {
-                setErrors({ address: "" });
                 setAddress(e.target.value);
-                const reg = new RegExp(/^[a-zA-Z0-9\s,'-]*$/).test(
-                  e.target.value
-                );
-                console.log(reg);
-                if (!reg) {
-                  setErrors({ address: "please enter a your address" });
-                }
+                requiredValidationOnChange(e.target.value,e.target.name)
               }}
             />
           </Grid>
           <Grid item md={12} className="text-center">
-            <Button variant="contained" color="primary" type="submit">
+            <Button variant="contained" onClick={handleSubmit} color="primary" type="button">
               Submit
             </Button>
           </Grid>

@@ -10,16 +10,10 @@ class ApiServices {
       console.log(error);
     }
   }
-
   async post(url, payload) {
     try {
-      await axios.post(
-        url,
-        { body: JSON.stringify(payload) },
-        {
-          headers: { "content-Type": "application/json" },
-        }
-      );
+      let data = await axios.post(url,payload);
+      return data;
     } catch (error) {
       console.Error(error);
     }
