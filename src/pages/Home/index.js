@@ -12,13 +12,12 @@ function Home() {
   const [loading, setLoading] = useState(false);
   const [debounceTimeoutHandle, setDebounceTimeoutHandle] = useState(null);
   let apiServices = new ApiServices();
-  const handleShow = () => {
-    let element = document.querySelectorAll(".search-field")[0];
+  const handleShow = (e) => {
     setAnchorPos({
-      top: element.offsetTop + element.offsetHeight + 5,
-      left: element.offsetLeft,
+      top: e.currentTarget.offsetTop + e.currentTarget.offsetHeight + 5,
+      left: e.currentTarget.offsetLeft,
     });
-    setpopupWidth(element.offsetWidth);
+    setpopupWidth(e.currentTarget.offsetWidth);
     setOpen(true);
   };
   const handleClose = () => {
@@ -56,7 +55,7 @@ function Home() {
       </div>
       <div className="w-75 mx-auto">
         <OutlinedInput
-          className="mt-3 search-field"
+          className="mt-3 w-100"
           placeholder="Search"
           onClick={handleShow}
           onChange={(event) => {

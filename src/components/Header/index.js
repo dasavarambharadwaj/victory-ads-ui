@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 const Header = () => {
   const location = useLocation();
   return (
-    <div className="d-flex mt-3 justify-content-between">
+    <div className="d-flex pt-3 justify-content-between">
       <Link className="fs-2" to="/">
         {location.pathname !== "/" && (
           <span className="fw-bold">VICTORY ADS</span>

@@ -4,8 +4,10 @@ import {
   Grid,
   InputAdornment,
   MenuItem,
+  Chip,
 } from "@mui/material";
 import { useState } from "react";
+import DropdownComponent from "../../components/DropdownComponent";
 import ApiServices from "../../services/apiServices";
 
 const business = [
@@ -29,6 +31,8 @@ function AddBusiness() {
   const [mobileNumber, setMobileNumber] = useState("");
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
+  const [selectedServices, setSelectedServices] = useState([]);
+  const [servicesList, setServicesList] = useState([]);
   const [errors, setErrors] = useState({});
 
   const handleSubmit = async (e) => {
@@ -50,9 +54,8 @@ function AddBusiness() {
           phone: [mobileNumber],
           address: address,
           email: email,
-          services: []
+          services: selectedServices
         });
-        console.log(response)
         if(response?.data?.acknowledged) {
           alert("Business Added Successfully")
         }
@@ -82,7 +85,7 @@ function AddBusiness() {
               error={Boolean(errors?.businessName)}
               helperText={errors?.businessName}
               id="outlined-basic"
-              className="white-field w-100"
+              className="w-100"
               label="Business Name"
               variant="outlined"
               name="businessName"
@@ -101,7 +104,7 @@ function AddBusiness() {
               select
               label="Select Business Type"
               variant="outlined"
-              className="white-field w-100"
+              className="w-100"
               name="businessType"
               value={businessType}
               onChange={(e) => {
@@ -110,7 +113,7 @@ function AddBusiness() {
               }}
             >
               {business.map((option) => (
-                <MenuItem value={option.value} className="white-field">
+                <MenuItem value={option.value}>
                   {option.value}
                 </MenuItem>
               ))}
@@ -121,14 +124,14 @@ function AddBusiness() {
               error={Boolean(errors?.mobileNumber)}
               helperText={errors?.mobileNumber}
               id="outlined-basic"
-              className="white-field w-100"
+              className="w-100"
               label="Mobile Number"
               variant="outlined"
               name="mobileNumber"
               value={mobileNumber}
               InputProps={{
                 startAdornment: (
-                  <InputAdornment position="start" className="white-field">
+                  <InputAdornment position="start">
                     +91
                   </InputAdornment>
                 ),
@@ -144,7 +147,7 @@ function AddBusiness() {
               error={Boolean(errors?.email)}
               helperText={errors?.email}
               id="outlined-basic"
-              className="white-field w-100"
+              className="w-100"
               label="Email"
               name="email"
               variant="outlined"
@@ -161,7 +164,7 @@ function AddBusiness() {
               helperText={errors?.address}
               fullWidth
               id="outlined-basic"
-              className="white-field w-100"
+              className="w-100"
               label="Address"
               variant="outlined"
               name="address"
@@ -174,7 +177,35 @@ function AddBusiness() {
               }}
             />
           </Grid>
-          <Grid item md={12} className="text-center">
+          <Grid item xs={12} md={12}>
+            <Grid className="p-2 border">
+              <Grid item xs={12} md={6}>
+                <DropdownComponent 
+                label="Services"
+                className="p-2"
+                onChange = {(value)=>{
+                  setSelectedServices([...value])
+                }}
+                />
+              </Grid>
+              <div className="p-2">
+                {selectedServices && selectedServices.map((item,index)=> 
+                  (<Chip 
+                    label={item}
+
+                    className="m-2 p-2" 
+                    variant="outlined"
+                    onDelete={()=>{
+                      let temp = [...selectedServices]
+                      temp.splice(index,1)
+                      setSelectedServices(temp);
+                    }}
+                  />)
+                )}
+              </div>
+            </Grid>
+          </Grid>
+          <Grid item md={12} className="text-center w-100">
             <Button variant="contained" onClick={handleSubmit} color="primary" type="button">
               Submit
             </Button>
