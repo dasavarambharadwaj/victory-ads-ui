@@ -3,24 +3,23 @@ import Header from "./components/Header";
 import AppRouter from "./routes";
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Paper } from "@mui/material";
+import { ThemeProvider } from "@mui/material/styles";
+import { AppStyles } from "./styles/globalStyles"
+import { Container, Paper } from "@mui/material";
+import FooterNavigation from "./components/footerNavigator";
 
 function App() {
-  const darkTheme = createTheme({
-    palette: {
-      mode: "dark",
-    },
-  });
+  
   return (
-    <ThemeProvider theme={darkTheme}>
+    <ThemeProvider theme={AppStyles}>
       <Paper>
-        <div className="container">
-          <BrowserRouter>
+        <BrowserRouter>
+          <Container>
             <Header />
             <AppRouter />
-          </BrowserRouter>
-        </div>
+          </Container>
+          <FooterNavigation />
+        </BrowserRouter>
       </Paper>
     </ThemeProvider>
   );

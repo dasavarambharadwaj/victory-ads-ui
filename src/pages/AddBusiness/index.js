@@ -5,6 +5,7 @@ import {
   InputAdornment,
   MenuItem,
   Chip,
+  Typography,
 } from "@mui/material";
 import { useState } from "react";
 import DropdownComponent from "../../components/DropdownComponent";
@@ -77,7 +78,9 @@ function AddBusiness() {
   
   return (
     <>
-      <h3 className="text-center">Add Business</h3>
+      <div className="mt-5 mb-3">
+        <Typography color="secondary" align="center" component="div" className="fs-3 fw-bold">ADD BUSINESS</Typography>
+      </div>
       <form autoComplete="off">
         <Grid container spacing={2} className="w-75 mx-auto">
           <Grid item xs={12} md={6}>

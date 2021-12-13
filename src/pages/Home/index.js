@@ -1,4 +1,4 @@
-import { CircularProgress, InputAdornment, OutlinedInput, Paper, Popover } from "@mui/material";
+import { CircularProgress, InputAdornment, OutlinedInput, Paper, Popover, Typography } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import "./Home.scss";
 import { useState } from "react";
@@ -50,9 +50,6 @@ function Home() {
   };
   return (
     <div className="text-center">
-      <div className="mt-5 fs-5 fw-bold">
-        <span>VICTORY ADS</span>
-      </div>
       <div className="w-75 mx-auto">
         <OutlinedInput
           className="mt-3 w-100"
