@@ -3,6 +3,10 @@
     border-radius: 15px;
   }
 }
+.remove-label fieldset legend{
+  display: none;
+
+}
 .popover-results-container { 
   max-height: 40vh;
   overflow: overlay;

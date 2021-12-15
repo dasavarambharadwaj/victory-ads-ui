@@ -1,4 +1,4 @@
-import { CircularProgress, InputAdornment, OutlinedInput, Paper, Popover, Typography } from "@mui/material";
+import { CircularProgress, InputAdornment, OutlinedInput, Paper, Popover, TextField, textFieldClasses, Typography } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import "./Home.scss";
 import { useState } from "react";
@@ -13,12 +13,14 @@ function Home() {
   const [debounceTimeoutHandle, setDebounceTimeoutHandle] = useState(null);
   let apiServices = new ApiServices();
   const handleShow = (e) => {
-    setAnchorPos({
-      top: e.currentTarget.offsetTop + e.currentTarget.offsetHeight + 5,
-      left: e.currentTarget.offsetLeft,
-    });
-    setpopupWidth(e.currentTarget.offsetWidth);
-    setOpen(true);
+    if(!open) {
+      setAnchorPos({
+        top: e.currentTarget.offsetTop + e.currentTarget.offsetHeight + 5,
+        left: e.currentTarget.offsetLeft,
+      });
+      setpopupWidth(e.currentTarget.offsetWidth);
+      setOpen(true);
+    }
   };
   const handleClose = () => {
     setOpen(false);
@@ -28,7 +30,7 @@ function Home() {
       clearTimeout(debounceTimeoutHandle);
       setDebounceTimeoutHandle(null);
     }
-    if (event.target.value !== "") {
+    if (event.target?.value?.length > 2) {
       setLoading(true);
       setDebounceTimeoutHandle(
         setTimeout(async () => {
@@ -50,21 +52,23 @@ function Home() {
   };
   return (
     <div className="text-center">
-      <div className="w-75 mx-auto">
-        <OutlinedInput
-          className="mt-3 w-100"
+      <div className="w-75 mx-auto mt-5 pt-5">
+        <TextField
+          className="mt-3 w-100 remove-label"
+          onInput={handleShow}
           placeholder="Search"
-          onClick={handleShow}
+          variant="outlined"
           onChange={(event) => {
             getDataOnSearch(event);
           }}
-          startAdornment={
+          InputProps={{
+          startAdornment:(
             <InputAdornment position="start">
               <SearchIcon></SearchIcon>
             </InputAdornment>
-          }
+          )}}
           aria-describedby="search-popup"
-        ></OutlinedInput>
+        ></TextField>
         <Popover
           id="search-popup"
           anchorReference="anchorPosition"
@@ -86,16 +90,12 @@ function Home() {
               <div className="d-flex">
                 <CircularProgress className="mx-auto" />
               </div>
-            ) : searchResults.length === 0 ? (
-              <div className="d-flex">
-                <span className="mx-auto">Search for business</span>
-              </div>
             ) : (
-              searchResults.map((item) => (
-                <div key={item.id} className="w-100 d-flex p-2">
+              searchResults.map((item,index) => (
+                <div key={index} className="w-100 d-flex p-2">
                   <span className="my-auto">{item.name}</span>
                   {item.category && (
-                    <span className={"category-box py-2 px-3 ms-2 category-box-" + item.category.toLowerCase()}>
+                    <span className={"category-box py-2 my-auto px-3 mx-2 category-box-" + item.category.toLowerCase()}>
                       {item.category}
                     </span>
                   )}
