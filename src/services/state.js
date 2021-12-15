@@ -1,19 +1,20 @@
 import { createSlice, configureStore } from '@reduxjs/toolkit'
+const initialValue = {
+  value:{
+    theme:"dark"
+  }
+}
 const appTheme = createSlice({
-    name: 'counter',
-    initialState: {
-      value: "light"
-    },
+    name: 'appStore',
+    initialState: initialValue,
     reducers: {
-      lightTheme: state => {
-        state.value = "light"
-      },
-      decremented: state => {
-        state.value = "dark"
+      change: (state,action) => {
+        state.value[action.payload.key] = action.payload.value
       }
     }
   })
-export const { lightTheme, lightTheme } = appTheme.actions
 const store = configureStore({
     reducer: appTheme.reducer
 })
+export const {change} = appTheme.actions
+export default store

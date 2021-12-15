@@ -4,14 +4,14 @@ import AppRouter from "./routes";
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
-import { AppStyles } from "./styles/globalStyles"
+import ThemeComponent from "./components/ThemeComponent";
 import { Container, Paper } from "@mui/material";
 import FooterNavigation from "./components/footerNavigator";
 
 function App() {
   
   return (
-    <ThemeProvider theme={AppStyles}>
+    <ThemeComponent>
       <Paper>
         <BrowserRouter>
           <Container>
@@ -21,7 +21,7 @@ function App() {
           <FooterNavigation />
         </BrowserRouter>
       </Paper>
-    </ThemeProvider>
+    </ThemeComponent>
   );
 }
 export default App;

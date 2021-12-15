@@ -4,10 +4,14 @@ import React, { useState } from 'react'
 import MenuIcon from '@mui/icons-material/Menu';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import {useDispatch} from 'react-redux'
+import {change} from '../../services/state'
 const Header = () => {
   const [openMenu,setOpenMenu] = useState(false)
   const theme = useTheme();
 	const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
+  const dispatch = useDispatch();
+  
   return (
     <div className="d-flex pt-3 justify-content-between">
       <Link to="/">
@@ -30,11 +34,14 @@ const Header = () => {
               </Link>
             </Paper>
           </Box>
-          <Box className="d-flex mb-2 mx-2">
+          <Box className="d-flex mb-2 mx-2" style={{maxWidth:"600px", minWidth:"20vw"}}>
             <Paper className="w-100">
               <ToggleButtonGroup
                 color="primary"
                 exclusive
+                onChange={(event)=>{
+                  dispatch(change({key:"theme",value:event.target.value}))
+                }}
                 className="w-100"
               >
                 <ToggleButton value="dark" className="w-50 py-4 fw-bold" >
@@ -46,7 +53,7 @@ const Header = () => {
               </ToggleButtonGroup>
             </Paper>
           </Box>
-          <Box className="d-flex mb-2 mx-2">
+          <Box className="d-flex mb-2 mx-2" style={{maxWidth:"600px", minWidth:"20vw"}}>
             <Paper className="w-100">
               <Link to="/about"className="w-100 m-auto">
                 <Button onClick={()=>{setOpenMenu(false)}} className="fw-bold p-4 w-100">About</Button>
