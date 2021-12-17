@@ -1,9 +1,15 @@
-import { CircularProgress, InputAdornment, OutlinedInput, Paper, Popover, TextField, textFieldClasses, Typography } from "@mui/material";
+import { CircularProgress, Divider, InputAdornment, OutlinedInput, Paper, Popover, TextField, textFieldClasses, Typography } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import "./Home.scss";
 import { useState } from "react";
 import ApiServices from "../../services/apiServices";
+import ListItemText from '@mui/material/ListItemText';
+import ListItemButton from '@mui/material/ListItemButton';
+import List from '@mui/material/List';
+import { useTheme } from '@mui/material/styles';
+import { useNavigate } from "react-router";
 function Home() {
+  const theme = useTheme()
   const [open, setOpen] = useState(false);
   const [anchorPos, setAnchorPos] = useState(null);
   const [popupWidth, setpopupWidth] = useState(0);
@@ -12,6 +18,7 @@ function Home() {
   const [loading, setLoading] = useState(false);
   const [debounceTimeoutHandle, setDebounceTimeoutHandle] = useState(null);
   let apiServices = new ApiServices();
+  let navigate = useNavigate();
   const handleShow = (e) => {
     if(!open) {
       setAnchorPos({
@@ -58,6 +65,9 @@ function Home() {
           onInput={handleShow}
           placeholder="Search"
           variant="outlined"
+          inputProps={{
+            autoComplete:"off"
+          }}
           onChange={(event) => {
             getDataOnSearch(event);
           }}
@@ -79,7 +89,8 @@ function Home() {
           disableAutoFocus
         >
           <Paper
-            style={{ width: popupWidth }}
+          square={true}
+            sx={{width:popupWidth}}
             className="popover-results-container p-2"
           >
             {noData ? (
@@ -91,16 +102,33 @@ function Home() {
                 <CircularProgress className="mx-auto" />
               </div>
             ) : (
-              searchResults.map((item,index) => (
-                <div key={index} className="w-100 d-flex p-2">
-                  <span className="my-auto">{item.name}</span>
+              <List
+              sx={{ width: '100%'}}
+              component="nav"
+              aria-labelledby="nested-list-subheader"
+              onClick={(e)=> {
+                let val = e.target.closest('.search-result-button')
+                let id = val.getAttribute("aria-id")
+                navigate(`/details/${id}`)
+              }}
+              >
+              {searchResults.map((item,index) => (
+                <ListItemButton key={index}
+                aria-id={item._id} 
+                sx={{
+                  borderRadius: theme.shape.borderRadius
+                }}
+                className="w-100 d-flex p-2 search-result-button">
+                  <ListItemText primary={item.name} />
                   {item.category && (
-                    <span className={"category-box py-2 my-auto px-3 mx-2 category-box-" + item.category.toLowerCase()}>
-                      {item.category}
-                    </span>
-                  )}
-                </div>
-              ))
+                      <span style={{borderRadius: theme.shape.borderRadius}} className={"category-box py-2 my-auto px-3 mx-2 category-box-" + item.category.toLowerCase()}>
+                        {item.category}
+                      </span>
+                    )}
+                </ListItemButton>
+              ))     
+              }         
+              </List>
             )}
           </Paper>
         </Popover>

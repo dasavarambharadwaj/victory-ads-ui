@@ -12,7 +12,7 @@ function App() {
   
   return (
     <ThemeComponent>
-      <Paper>
+      <Paper square={true}>
         <BrowserRouter>
           <Container>
             <Header />

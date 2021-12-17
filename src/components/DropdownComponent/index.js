@@ -2,12 +2,11 @@ import { InputAdornment, List, ListItem,ListItemButton, ListItemText, Paper, Pop
 import { useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 
-const DropdownComponent = ({label,onChange,className}) => {
+const DropdownComponent = ({value,label,onChange,className}) => {
     const [open, setOpen] = useState(false);
     const [anchorPos, setAnchorPos] = useState(null);
     const [popupWidth, setpopupWidth] = useState(0);
     const [search,setSearch] = useState("")
-    const [selectedList,setSelectedList] = useState([])
     const handleShow = (e) => {
       setAnchorPos({
         top: e.currentTarget.offsetTop + e.currentTarget.offsetHeight + 5,
@@ -54,9 +53,8 @@ const DropdownComponent = ({label,onChange,className}) => {
                   <List>
                     <ListItem disablePadding>
                       <ListItemButton onClick={()=>{
-                        let newList = selectedList
+                        let newList = value
                         newList.push(search)
-                        setSelectedList(newList)
                         setSearch("")
                         handleClose()
                         onChange(newList)

@@ -1,7 +1,7 @@
 import { createSlice, configureStore } from '@reduxjs/toolkit'
 const initialValue = {
   value:{
-    theme:"dark"
+    theme:"light"
   }
 }
 const appTheme = createSlice({

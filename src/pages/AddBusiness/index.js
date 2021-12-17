@@ -184,9 +184,10 @@ function AddBusiness() {
             <Grid className="p-2 border">
               <Grid item xs={12} md={6}>
                 <DropdownComponent 
+                value={selectedServices}
                 label="Services"
                 className="p-2"
-                onChange = {(value)=>{
+                onChange = {(value) => {
                   setSelectedServices([...value])
                 }}
                 />
