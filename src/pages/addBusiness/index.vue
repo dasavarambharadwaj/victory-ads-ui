@@ -4,7 +4,7 @@
 
 <script>
   export default {
-    name: 'AboutPage',
+    name: 'AddBusinessPage',
     props: {
     },
     components:{

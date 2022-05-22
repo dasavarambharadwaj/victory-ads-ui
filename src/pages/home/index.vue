@@ -6,7 +6,7 @@
       <VSelect class="my-3" :list="businesses" item-text="text" item-value="value" placeholder="Search Local Business" prefixIcon="search"></VSelect>
     </div>
     </div>
-    <div class="w-full h-96 bg-white">
+    <div class="w-full h-96 bg-gray-200">
       <VCarousel />
     </div>
     <div class="w-full h-96">

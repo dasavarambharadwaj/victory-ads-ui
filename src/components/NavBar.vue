@@ -2,17 +2,35 @@
   <nav id="header" class="w-full z-30 top-0 py-1 lg:py-6">
     <div class="flex flex-wrap items-center justify-between mt-0 px-2 py-2 lg:py-6">
       <div class="pl-4 flex items-center">
-      <router-link to="/"><a class=" font-bold text-2xl lg:text-3xl">Victory Ads</a></router-link> 
-        
+      <router-link to="/"><a class=" font-bold text-2xl lg:text-3xl">Victory Ads</a></router-link>
       </div>
-      <div class="block lg:hidden pr-4">
-        <button id="nav-toggle"
+      <div class="block lg:hidden pr-4 relative">
+        <button id="nav-toggle" @click="toggleRightMenu"
           class="flex items-center px-3 py-2 border rounded-md border-gray-600 hover:border-cyan-700 appearance-none focus:outline-none">
-          <span class="material-symbols-outlined text-xs">menu</span>
+          <span class="material-symbols-outlined text-2xl lg:text-3xl">{{toggleMenu?'arrow_forward':'menu'}}</span>
         </button>
+        <div @click="toggleRightMenu" v-if="toggleMenu" class="z-10 fixed w-full text-gray-900 right-0 bg-gray-200 h-[calc(100vh-62px)]">
+          <ul class="py-1 text-sm " aria-labelledby="dropdownDefault">
+            <router-link to="/add-business">
+            <li class="m-2 p-2 border-b border-gray-900 cursor-pointer hover:bg-gray-900 hover:text-gray-200">
+              <VLink>Add Business</VLink>
+            </li>
+            </router-link>
+            <router-link to="/category-list">
+            <li class="m-2 p-2 border-b border-gray-900 cursor-pointer hover:bg-gray-900 hover:text-gray-200">
+              <VLink>Categories</VLink>
+            </li>
+            </router-link>
+            <router-link to="/about">
+            <li class="m-2 p-2 border-b border-gray-900 cursor-pointer hover:bg-gray-900 hover:text-gray-200">
+              <VLink>About Us</VLink>
+            </li>
+            </router-link>
+          </ul>
+        </div>
       </div>
       <div
-        class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden lg:block mt-2 lg:mt-0 p-4 lg:p-0 z-20"
+        class="w-full flex-grow lg:items-center lg:w-auto hidden lg:block mt-2 lg:mt-0 p-4 lg:p-0 z-20"
         id="nav-content">
         <ul class="list-reset lg:flex justify-end flex-1 items-center">
           <li class="mr-3">
@@ -22,27 +40,15 @@
           </li>
 
           <li class="mr-3">
-            <button id="dropdownDefault" data-dropdown-toggle="dropdown"
-              class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-              type="button">
-              Categories</button>
+            <router-link to="/category-list">
+              <button id="dropdownDefault" data-dropdown-toggle="dropdown"
+                class="text-gray-200 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none 
+                focus:ring-blue-300 font-medium rounded-md text-sm px-4 py-2.5 text-center inline-flex 
+                items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                type="button">Categories</button>
+              </router-link>
             <!-- Dropdown menu -->
-            <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-md shadow w-44 dark:bg-gray-700">
-                <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefault">
-                  <li>
-                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
-                  </li>
-                  <li>
-                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
-                  </li>
-                  <li>
-                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
-                  </li>
-                  <li>
-                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</a>
-                  </li>
-                </ul>
-            </div>
+            
           </li>
           <!-- <li class="mr-3">
             <a href="#">
@@ -62,11 +68,21 @@
 import VLink from '@/components/vLink'
 export default {
   name: 'NavBar',
+  data() {
+    return{
+      toggleMenu:false
+    }
+  },
   props: {
     msg: String
   },
   components:{
     VLink
+  },
+  methods: {
+    toggleRightMenu() {
+      this.toggleMenu = !this.toggleMenu
+    }
   }
 }
 </script>
