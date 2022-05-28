@@ -5,7 +5,7 @@
       <v-input placeholder="Search Hospitals" prefixIcon="search" size="small" class=" lg:w-1/4 w-full mx-2"
         v-model="categorySearchString"></v-input>
     </div>
-    <div class="rounded-md p-2 bg-gray-200 text-gray-900">
+    <div class="rounded-md p-2  text-gray-200">
       <v-category-list @selected="BusinessSelected" :list="list"></v-category-list>
       
     </div>

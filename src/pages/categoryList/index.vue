@@ -5,7 +5,7 @@
       <v-input placeholder="Search Categories" prefixIcon="search" size="small" class=" lg:w-1/4 w-full mx-2"
         v-model="categorySearchString"></v-input>
     </div>
-    <div class=" rounded-md p-2 border border-white text-gray-900 bg-gray-200">
+    <div class=" rounded-md p-2 border border-white text-gray-200">
         <v-selector @click="categorySelected" :list="categoriesList"></v-selector>
     </div>
   </div>

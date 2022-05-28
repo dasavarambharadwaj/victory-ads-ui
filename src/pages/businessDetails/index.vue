@@ -5,7 +5,7 @@
       <img alt="ecommerce" class="lg:w-1/2 w-full object-cover object-center rounded-md border border-gray-200" src="https://www.whitmorerarebooks.com/pictures/medium/2465.jpg">
       <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
         <h2 class="text-sm title-font tracking-widest">Hospital</h2>
-        <h1 class=" text-3xl title-font font-medium mb-1">Children's Multi Speciality Hospital</h1>
+        <h1 class="lg:text-5xl text-4xl title-font font-medium mb-1">Children's Multi Speciality Hospital</h1>
         <div class="flex mb-4">
             <span class="flex items-center">
                 <span class="material-symbols-outlined cursor-pointer">call</span>

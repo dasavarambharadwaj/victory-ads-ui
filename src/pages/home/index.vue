@@ -1,12 +1,12 @@
 <template>
   <div class="text-center my-12">
-    <h1 class="text-2xl lg:text-4xl font-bold text-yellow-400 my-3">Search Local Business</h1>
+    <h1 class="lg:text-5xl text-4xl font-bold text-yellow-400 my-3">Search Local Business</h1>
     <div class="w-full lg:w-1/2 text-center inline-block">
       <VSelect class="my-3" @change="printLocation" v-model="location" :list="locations" item-text="text" item-value="value" placeholder="Select Location" prefixIcon="pin_drop"></VSelect>
       <VSelect class="my-3" :list="businesses" item-text="text" item-value="value" placeholder="Search Local Business" prefixIcon="search"></VSelect>
     </div>
     </div>
-    <div class="w-full h-96 bg-gray-200">
+    <div class="w-full">
       <VCarousel />
     </div>
     <div class="w-full h-96">
@@ -44,6 +44,18 @@ import VCarousel from '@/components/vCarousel'
           {
             text:"Patancheru",
             value:"patancheru"
+          },
+          {
+            text:"Ram Chandra Puram",
+            value:"Ram Chandra Puram"
+          },
+          {
+            text:"Jogipet",
+            value:"Jogipet"
+          },
+          {
+            text:"Narayankhed",
+            value:"Narayankhed"
           }
         ],
         businesses:[

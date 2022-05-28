@@ -1,8 +1,8 @@
 <template>
     <div class="flex flex-wrap justify-center">
       <div tabindex="0" aria-label="card 1" v-for="(item,index) in list" :key="index" @click="BusinessSelected(item.id)"
-        class="focus:outline-none cursor-pointer lg:w-5/12 2xl:w-3/12 w-full border border-gray-900 text-gray-200 m-2 bg-gray-900  p-6 shadow rounded">
-        <div class="flex items-center border-b border-gray-900  pb-6">
+        class="focus:outline-none cursor-pointer lg:w-5/12 2xl:w-3/12 w-full border-4 border-gray-200 text-gray-200 m-2 bg-gray-900  p-6 shadow rounded">
+        <div class="flex items-center border-b border-gray-200  pb-6">
           <span class="material-symbols-outlined text-6xl">{{item.icon}}</span>
           <div class="flex items-start justify-between w-full">
             <div class="pl-3 w-full">
