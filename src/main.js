@@ -4,6 +4,7 @@ import 'material-symbols/outlined.css';
 import './styles/index.css';
 import router from '@/router'
 import {clickOutside} from '@/directives'
+import './registerServiceWorker'
 
 const app = createApp(App)
 app.directive("click-outside",clickOutside)

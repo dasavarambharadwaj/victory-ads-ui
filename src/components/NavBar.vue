@@ -9,7 +9,7 @@
           class="flex items-center px-3 py-2 border rounded-md border-gray-600 hover:border-cyan-700 appearance-none focus:outline-none">
           <span class="material-symbols-outlined text-2xl lg:text-3xl">{{toggleMenu?'arrow_forward':'menu'}}</span>
         </button>
-        <div @click="toggleRightMenu" v-if="toggleMenu" class="z-10 fixed w-full text-gray-900 right-0 bg-gray-200 h-[calc(100vh-62px)]">
+        <div @click="toggleRightMenu" v-if="toggleMenu" class="z-20 fixed w-full text-gray-900 right-0 bg-gray-200 h-[calc(100vh-62px)]">
           <ul class="py-1 text-sm " aria-labelledby="dropdownDefault">
             <router-link to="/add-business">
             <li class="m-2 p-2 border-b border-gray-900 cursor-pointer hover:bg-gray-900 hover:text-gray-200">
