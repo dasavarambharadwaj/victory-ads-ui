@@ -1,11 +1,11 @@
 <template>
-  <div class="w-full container mx-auto">
+  <div class="w-full mt-24 container mx-auto">
     <div class="flex lg:justify-between flex-col lg:flex-row items-center">
       <div class="text-2xl text-center lg:text-left font-bold">Categories</div>
       <v-input placeholder="Search Categories" prefixIcon="search" size="small" class=" lg:w-1/4 w-full mx-2"
         v-model="categorySearchString"></v-input>
     </div>
-    <div class=" rounded-md p-2 border border-white text-gray-200">
+    <div class=" rounded-md p-2 border border-gray-200 text-gray-200">
         <v-selector @click="categorySelected" :list="categoriesList"></v-selector>
     </div>
   </div>

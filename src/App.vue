@@ -1,11 +1,11 @@
 <template>
 <div class="w-full select-none text-gray-200 bg-gray-900 gradient-background h-screen leading-relaxed tracking-wide overflow-auto">
-  <div class="mx-auto flex flex-col">
+  <div class="mx-auto flex flex-col h-full">
     <div id="nav-bar-container">
       <NavBar />
     </div>
-    <div class="h-[calc(100vh-92px)] lg:h-[calc(100vh-164px)] overflow-y-auto">
-    <div id="main-content" class="min-h-full">
+    <div class=" flex-grow overflow-y-auto">
+    <div id="main-content" class="min-h-full p-2">
       <router-view />
     </div>
     <div id="footer-container">
@@ -14,18 +14,42 @@
     </div>
   </div>
 </div>
+<div class="fixed w-full h-full top-0 z-30 bg-gray-900 bg-opacity-75 overflow-auto" v-if="showLocationPopup">
+  <div class="bg-white w-[calc(100%-20px)] max-w-md rounded-md m-auto mt-32">
+    <ask-location @change="checkLocation"></ask-location>
+  </div>
+</div>
 </template>
 
 <script>
 import NavBar from './components/NavBar.vue'
 import VFooter from './components/vFooter.vue'
+import askLocation from '@/components/askLocation.vue'
+import {mapState} from 'vuex'
 
 export default {
   name: 'App',
+  data() {
+    return {
+    }
+  },
   components: {
     NavBar,
-    VFooter
-}
+    VFooter,
+    askLocation
+  },
+  computed: mapState([
+    'location',
+    'showLocationPopup'
+  ]),
+  created() {
+    this.checkLocation();
+  },
+  methods:{
+    checkLocation() {
+      this.$store.commit('setshowLocationPopup',this.location === "")
+    }
+  }
 }
 </script>
 

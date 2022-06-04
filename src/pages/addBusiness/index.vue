@@ -1,14 +1,14 @@
 <template>
       <div
-        class=" max-w-screen-2xl mt-24 mb-8 px-8 grid gap-8 grid-cols-1 lg:grid-cols-2 md:px-12 lg:px-16 xl:px-32 py-16 mx-auto bg-gray-800 text-gray-200 rounded-lg shadow-lg">
+        class=" max-w-screen-2xl mt-24 mb-8 px-8 grid gap-8 grid-cols-1 lg:grid-cols-2 md:px-12 lg:px-16 xl:px-32 py-16 mx-auto bg-blue-900 text-gray-200 rounded-lg shadow-lg">
         <div class="flex flex-col justify-between">
           <div>
-            <h2 class="text-4xl lg:text-5xl font-bold leading-tight">Add Your Business</h2>
+            <h2 class="text-4xl text-yellow-400 lg:text-5xl font-bold leading-tight">Add Business</h2>
             <div class="mt-8">
               Fill out the form to get your business listed on our website.
             </div>
           </div>
-          <div class="mt-8 text-center">
+          <div class="mt-8 text-center hidden lg:block">
             <search-icon></search-icon>
           </div>
         </div>
@@ -32,7 +32,7 @@
             <v-textarea placeholder="Enter Address" size="small" label="Address"></v-textarea>
           </div>
           <div class="mt-8 text-center">
-            <button class="mt-2 rounded-md bg-transparent px-8 py-4 font-medium  transition-colors bg-blue-800 text-white disabled:opacity-50">Submit</button>
+            <button class="mt-2 rounded-md bg-transparent px-8 py-4 font-medium  transition-colors bg-yellow-400 text-blue-900 disabled:opacity-50">Submit</button>
           </div>
         </div>
       </div>
