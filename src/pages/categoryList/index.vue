@@ -5,14 +5,14 @@
       <div class="flex lg:justify-between flex-col lg:flex-row items-center">
         <h2 class="text-4xl text-yellow-400 lg:text-5xl font-bold leading-tight mb-4">Categories</h2>
         <v-input placeholder="Search Hospitals" prefixIcon="search" size="small" class=" lg:w-1/4 w-full mx-2"
-          v-model="categorySearchString"></v-input>
+          v-model="categorySearchString" @change="getCategories"></v-input>
       </div>
       <div class="mt-8 text-center hidden lg:block">
         <contact-us></contact-us>
       </div>
     </div>
     <div class="rounded-md p-2  text-gray-200">
-      <v-selector @selected="categorySelected" :list="categoriesList"></v-selector>
+      <v-selector @selected="categorySelected" :loading="loading" :list="categoriesList"></v-selector>
     </div>
   </div>
 </template>
@@ -20,33 +20,15 @@
 <script>
 import VInput from '@/components/vInput'
 import VSelector from '@/pages/categoryList/components/vSelector.vue'
+import apiService from '@/services/apiService'
   export default {
     name: 'categoriesPage',
     data() {
         return {
             categorySearchString:'',
-            categoriesList:[
-              {
-                icon:'local_hospital',
-                name:'Hospital',
-                value:0
-              },
-              {
-                icon:'school',
-                name:'Schools & Colleges',
-                value:1
-              },
-              {
-                icon:'cake',
-                name:'Bakery',
-                value:2
-              },
-              {
-                icon:'restaurant',
-                name:'Restaurant',
-                value:3
-              },
-            ]
+            categoriesList:[],
+            timeout:null,
+            loading: false
         }
     },
     props: {
@@ -55,9 +37,33 @@ import VSelector from '@/pages/categoryList/components/vSelector.vue'
         VInput,
         VSelector
     },
+    async created(){
+      await this.getCategories()
+    },
     methods: {
       categorySelected(value) {
       this.$router.push({name:'Category',params:{id:value}})
+      },
+      async getCategories() {
+        this.loading = true
+        if(this.timeout) {
+          clearTimeout(this.timeout);
+        }
+        this.timeout = setTimeout(async () => {
+          try {
+            let response = await apiService.get('/categories',{search:this.categorySearchString})
+            if(response.data) {
+              this.categoriesList = response?.data[0]
+            } else {
+              this.categoriesList = []
+            }
+          } catch(e) {
+            this.categoriesList = []
+          }
+          this.loading = false
+        }, 300);
+        
+        
       }
     }
   }
