@@ -71,7 +71,7 @@
             style="isolation: isolate;"></rect>
         <rect x="171.57" y="166.72" width="63.25" height="3.87" fill="#7f1d1d" opacity="0.18"
             style="isolation: isolate;"></rect>
-        <ellipse cx="150.82" cy="246.31" rx="104.8" ry="12.77" fill="#7f1d1d" opacity="0.18"
+        <ellipse cx="150.82" cy="246.31" rx="104.8" ry="12.77" fill="#fbbf24" opacity="0.18"
             style="isolation: isolate;"></ellipse>
         <path
             d="M104.33,280c-.89.68-1.67,1.85-1.2,2.88s1.74,1.17,2.82,1.2A53.48,53.48,0,0,0,118.12,283a.55.55,0,0,0,.32-.14.52.52,0,0,0,.11-.36,55.26,55.26,0,0,0,.38-7.5c-2.2-.62-4.75.13-6.72,1.14C109.68,277.39,106.58,278.26,104.33,280Z"

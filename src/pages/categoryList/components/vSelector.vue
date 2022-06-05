@@ -1,13 +1,18 @@
 <template>
   <div class="flex flex-wrap justify-center">
-    <div v-for="(item,index) in list" :data-value="item.value" :key="index"
-      class=" m-1 shrink-0 rounded-md border-4 cursor-pointer text-gray-200 h-32 w-32 border-gray-200">
-      <div class="flex h-full flex-col items-center justify-center" :data-value="item.value">
-        <span class="material-symbols-outlined text-6xl" :data-value="item.value">{{item.icon}}</span>
-        <span class=" text-center" :data-value="item.value">{{item.name}}</span>
+      <div tabindex="0" aria-label="card 1" :data-value="item.value" v-for="(item,index) in list" :key="index" @click="CategorySelected(item.value)"
+        class="focus:outline-none cursor-pointer lg:w-5/12 2xl:w-3/12 w-full border-4 border-gray-200 text-gray-200 m-2 bg-blue-900  p-6 shadow rounded-md">
+        <div class="flex items-center pb-6">
+          <span class="material-symbols-outlined text-6xl">{{item.icon}}</span>
+          <div class="flex items-start justify-between w-full">
+            <div class="pl-3 w-full">
+              <p tabindex="0" class="focus:outline-none text-xl font-bold text-white leading-5 ">
+                {{item.name}}</p>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
+      </div>
 </template>
 <script>
 export default {
@@ -18,6 +23,11 @@ export default {
                 return []
             },
             type:Array
+        }
+    },
+    methods:{
+      CategorySelected(value) {
+            this.$emit("selected",value)
         }
     }
     
