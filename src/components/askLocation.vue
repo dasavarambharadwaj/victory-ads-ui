@@ -9,11 +9,12 @@
         <div class="text-gray-200">or</div>
         <div class="border my-4 mx-2 grow"></div>
       </div>
-    <v-select class="mb-20" @change="locationChanged" placeholder="Select Location" prefixIcon="pin_drop" v-model="location" :list="locations" item-text="text" item-value="value" size="medium"></v-select>
+    <v-select class="mb-20" @change="locationChanged" placeholder="Select Location" prefixIcon="pin_drop" v-model="locationId" :list="locations" item-text="location_name" item-value="location_id" size="medium"></v-select>
 </div>
 </template>
 <script>
 import vSelect from './vSelect.vue'
+import apiService from '@/services/apiService'
 export default {
   components: {
     vSelect
@@ -21,45 +22,24 @@ export default {
   name: "askLocation",
   data() {
     return {
-      location: '',
-      locations: [{
-          text: "Sangareddy",
-          value: "sangareddy"
-        },
-        {
-          text: "Zaheerabad",
-          value: "zaheerabad"
-        },
-        {
-          text: "Sadasivapet",
-          value: "sadasivapet"
-        },
-        {
-          text: "Patancheru",
-          value: "patancheru"
-        },
-        {
-          text: "Ram Chandra Puram",
-          value: "Ram Chandra Puram"
-        },
-        {
-          text: "Jogipet",
-          value: "Jogipet"
-        },
-        {
-          text: "Narayankhed",
-          value: "Narayankhed"
-        }
-      ],
+      locationId: '',
+      locations: [],
     }
   },
+  created() {
+    this.getLocationData()
+  },
   methods: {
-    locationChanged() {
-      this.$store.commit('setLocation',this.location)
+    locationChanged(text) {
+      this.$store.commit('setLocation',text)
+      this.$store.commit('setLocationId',this.locationId)
       setTimeout(() => {
         this.$emit('change')        
       }, 500);
-
+    },
+    async getLocationData() {
+      let response = await apiService.get('/locations',{search:this.categorySearchString})
+      this.locations = response?.data[0]
     }
   }
 

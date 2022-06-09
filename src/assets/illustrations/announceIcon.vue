@@ -1,7 +1,7 @@
 <template>
     <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-        viewBox="0 0 364.98 285.68" class="h-full max-h-96 m-auto">
-        <defs>
+        viewBox="80 80 80 185" class="h-full max-h-96 m-auto overflow-visible">
+        <!-- <defs>
             <linearGradient id="linear-gradient" x1="-553.86" y1="120.14" x2="-661.67" y2="48.26"
                 gradientTransform="translate(-305.95 352) rotate(180)" gradientUnits="userSpaceOnUse">
                 <stop offset="0.01"></stop>
@@ -70,9 +70,9 @@
         <rect x="171.57" y="159.85" width="63.25" height="3.87" fill="#7f1d1d" opacity="0.18"
             style="isolation: isolate;"></rect>
         <rect x="171.57" y="166.72" width="63.25" height="3.87" fill="#7f1d1d" opacity="0.18"
-            style="isolation: isolate;"></rect>
-        <ellipse cx="150.82" cy="246.31" rx="104.8" ry="12.77" fill="#fbbf24" opacity="0.18"
-            style="isolation: isolate;"></ellipse>
+            style="isolation: isolate;"></rect> -->
+        <ellipse cx="150.82" cy="246.31" rx="104.8" ry="12.77" fill="#7f1d1d" opacity="0.18"
+            style="isolation: isolate;"></ellipse> 
         <path
             d="M104.33,280c-.89.68-1.67,1.85-1.2,2.88s1.74,1.17,2.82,1.2A53.48,53.48,0,0,0,118.12,283a.55.55,0,0,0,.32-.14.52.52,0,0,0,.11-.36,55.26,55.26,0,0,0,.38-7.5c-2.2-.62-4.75.13-6.72,1.14C109.68,277.39,106.58,278.26,104.33,280Z"
             transform="translate(-19.54 -37.78)" fill="#7f1d1d"></path>
@@ -103,14 +103,14 @@
             transform="translate(-19.54 -37.78)" fill="#fcbdba"></path>
         <path
             d="M172.33,143.18V167a19.12,19.12,0,0,0-2.63-2.46,24.28,24.28,0,0,0-14.09-5.26,4.83,4.83,0,0,1-4.3-2.8h0a5.15,5.15,0,0,1-.41-2.66,4.75,4.75,0,0,1,4.86-4C158.46,149.71,163.76,148.71,172.33,143.18Z"
-            transform="translate(-19.54 -37.78)" fill="#fbbf24"></path>
-        <ellipse cx="153.88" cy="117.28" rx="6.14" ry="11.89" fill="#fbbf24"></ellipse>
+            transform="translate(-19.54 -37.78)" fill="#7f1d1d"></path>
+        <ellipse cx="153.88" cy="117.28" rx="6.14" ry="11.89" fill="#7f1d1d"></ellipse>
         <ellipse cx="153.88" cy="117.28" rx="6.14" ry="11.89" fill="url(#linear-gradient-6)"></ellipse>
         <path d="M167.85,150.05l5.57,1.74v6l-5.62,2.06A24,24,0,0,1,167.85,150.05Z" transform="translate(-19.54 -37.78)"
             fill="url(#linear-gradient-7)"></path>
         <path d="M157.11,165h3.47v3.05a1.74,1.74,0,0,1-1.74,1.74h0a1.74,1.74,0,0,1-1.74-1.74h0V165Z"
             transform="translate(-19.54 -37.78)" fill="#7f1d1d"></path>
-        <ellipse cx="153.88" cy="117.01" rx="1.41" ry="3" fill="#fbbf24"></ellipse>
+        <ellipse cx="153.88" cy="117.01" rx="1.41" ry="3" fill="#7f1d1d"></ellipse>
         <path
             d="M169.7,164.49a24.28,24.28,0,0,0-14.09-5.26,4.83,4.83,0,0,1-4.3-2.8c.13.14,1.62,1.56,5.81.85,4.4-.75,10.48,1.48,10.48,1.48Z"
             transform="translate(-19.54 -37.78)" fill="url(#linear-gradient-8)"></path>
@@ -120,7 +120,7 @@
         <path
             d="M119.34,184a4.31,4.31,0,0,1,.44-.59,1.23,1.23,0,0,1,.85-.37.26.26,0,0,1,.19.06.47.47,0,0,1,.06.15c.05.29.07.58.14.86a1.38,1.38,0,0,0,.42.75c.45.37,1.32.13,1.84.07l2.2-.25a1.54,1.54,0,0,1,1.31.25c.43.42.24,1.13,0,1.69-.67,1.66-1.55,3.47-3.23,4.1-2,.76-4.24-.47-6.35-.14-1.18.18-2.49.63-3.19-.68a2.13,2.13,0,0,1,.12-2.31,6.88,6.88,0,0,1,2.21-1.31,12.31,12.31,0,0,0,1.93-1.26,7.65,7.65,0,0,0,.89-.81Z"
             transform="translate(-19.54 -37.78)" fill="#fcbdba"></path>
-        <path d="M202,150.05a14.92,14.92,0,1,1,0-.16Z" transform="translate(-19.54 -37.78)" fill="#7f1d1d"
+        <!-- <path d="M202,150.05a14.92,14.92,0,1,1,0-.16Z" transform="translate(-19.54 -37.78)" fill="#7f1d1d"
             opacity="0.18" style="isolation: isolate;"></path>
         <circle cx="167.07" cy="110.99" r="4.44" fill="#7f1d1d" opacity="0.34" style="isolation: isolate;"></circle>
         <path d="M196.28,161.85a15,15,0,0,1-19.17-.54,10,10,0,0,1,19.17.54Z" transform="translate(-19.54 -37.78)"
@@ -159,6 +159,6 @@
         <path d="M90.67,160.34l-17.48-4.81.35-19.92a2.13,2.13,0,0,1,2.18.9l14.68,22A2.08,2.08,0,0,1,90.67,160.34Z"
             transform="translate(-19.54 -37.78)" fill="url(#linear-gradient-10)"></path>
         <polygon points="53.77 110.61 41.19 110.64 54.98 131.35 59.91 119.47 53.66 117.75 53.77 110.61"
-            fill="url(#linear-gradient-11)"></polygon>
+            fill="url(#linear-gradient-11)"></polygon> -->
     </svg>
 </template>

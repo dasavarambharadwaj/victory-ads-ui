@@ -2,10 +2,10 @@
 <section class="text-gray-200 body-font overflow-hidden">
   <div class="container px-5 py-24 mx-auto">
     <div class="lg:w-4/5 mx-auto flex flex-wrap">
-      <img alt="ecommerce" class="lg:w-1/2 w-full object-cover object-center rounded-md border border-gray-200" src="https://www.whitmorerarebooks.com/pictures/medium/2465.jpg">
+      <img alt="Image" class="lg:w-1/2 w-full object-cover object-center rounded-md border border-gray-200" src="">
       <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
         <h2 class="text-sm title-font tracking-widest">Hospital</h2>
-        <h1 class="lg:text-5xl text-4xl title-font font-medium mb-1 text-yellow-400">Children's Multi Speciality Hospital</h1>
+        <h1 class="lg:text-5xl text-4xl title-font font-medium mb-1 text-yellow-400">{{data.business_name}}</h1>
         <div class="flex mb-4">
             <span class="flex items-center">
                 <span class="material-symbols-outlined cursor-pointer">call</span>
@@ -29,17 +29,12 @@
 
         <span class="flex mt-6 items-center pb-5 border-b-2 border-gray-200 mb-5">
             <p class="leading-relaxed">
-                Near New Bus stand, Shantinagar, Sangareddy, Telangana, 502001
+                {{data.address}}
             </p>
         </span>
         <div class="flex mt-6 items-center pb-5 mb-5">
         <p class="leading-relaxed">
-            Et officia veniam enim nisi quis qui minim non nostrud veniam. Excepteur amet elit duis excepteur minim
-            exercitation Lorem reprehenderit eu. Nostrud sint aliquip dolore nulla ex id Lorem quis velit id. Laborum
-            esse in ut deserunt irure duis laborum ad pariatur incididunt labore deserunt.
-            Adipisicing reprehenderit dolor laborum aliqua. Reprehenderit consectetur ex nostrud in enim magna. Laborum
-            ut excepteur aliqua non voluptate Lorem aute exercitation consectetur. Ea proident eu id aute laborum tempor
-            sint velit aute.
+            No extra info available
         </p>
         </div>
       </div>
@@ -49,11 +44,13 @@
 </template>
 
 <script>
+import apiService from '@/services/apiService'
   export default {
     name: 'BusinessDetails',
     data() {
         return {
-            id:null
+            id:null,
+            data:{}
         }
     },
     props: {
@@ -62,9 +59,13 @@
     },
     created() {
         this.id = this.$route.params.id
+        this.getBusinessDetailsById()
     },
     methods:{
-
+      async getBusinessDetailsById() {
+        let response = await apiService.get('/businessDetails',{business_id:this.id})
+        this.data = response?.data[0]
+      }
     }
   }
 </script>

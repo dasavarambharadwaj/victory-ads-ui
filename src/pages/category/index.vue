@@ -12,7 +12,11 @@
       </div>
     </div>
     <div class="rounded-md p-2  text-gray-200">
-      <v-category-list @selected="BusinessSelected" :list="list"></v-category-list>
+      <div v-if="loading">Loading</div>
+      <div v-else-if="list.length === 0">No data available</div>
+      <div v-else>
+        <v-category-list @selected="BusinessSelected" :list="list"></v-category-list>
+      </div>
     </div>
   </div>
 </template>
@@ -20,60 +24,16 @@
 <script>
 import VInput from '@/components/vInput.vue'
 import VCategoryList from './components/vCategoryList.vue'
+import apiService from '@/services/apiService'
+import {mapState} from 'vuex'
   export default {
     name: 'subCategoryPage',
     data() {
         return {
             categoryId:null,
-            list: [{
-              id:0,
-              name: "Multi Speciality Hospital 1",
-              address: "Beside New Bus-stand, Shantinagar, Sangareddy, Telangana, 502001",
-              icon:"local_hospital"
-            },
-            {
-              id:1,
-              name: "Children's Multi Speciality Hospital 1",
-              address: "Beside New Bus-stand, Shantinagar, Sangareddy, Telangana, 502001",
-              icon:"local_hospital"
-            },
-            {
-              id:2,
-              name: "Multi Speciality Hospital 2",
-              address: "Beside New Bus-stand, Shantinagar, Sangareddy, Telangana, 502001",
-              icon:"local_hospital"
-            },
-            {
-              id:3,
-              name: "Multi Speciality Hospital 3",
-              address: "Beside New Bus-stand, Shantinagar, Sangareddy, Telangana, 502001",
-              icon:"local_hospital"
-            },
-            {
-              id:4,
-              name: "Multi Speciality Hospital 4",
-              address: "Beside New Bus-stand, Shantinagar, Sangareddy, Telangana, 502001",
-              icon:"local_hospital"
-            },
-            {
-              id:5,
-              name: "Multi Speciality Hospital 5",
-              address: "Beside New Bus-stand, Shantinagar, Sangareddy, Telangana, 502001",
-              icon:"local_hospital"
-            },
-            {
-              id:6,
-              name: "Multi Speciality Hospital 6",
-              address: "Beside New Bus-stand, Shantinagar, Sangareddy, Telangana, 502001",
-              icon:"local_hospital"
-            },
-            {
-              id:7,
-              name: "Diagnostic center",
-              address: "Beside New Bus-stand, Shantinagar, Sangareddy, Telangana, 502001",
-              icon:"local_hospital"
-            }
-            ]
+            categorySearchString:"",
+            list: [],
+            loading:false
         }
     },
     components:{
@@ -82,10 +42,20 @@ import VCategoryList from './components/vCategoryList.vue'
     },
     created() {
         this.categoryId = this.$route.params.id
+        this.getBusinessListByCategory()
     },
+    computed: mapState([
+      'location_id'
+    ]),
     methods:{
       BusinessSelected(val) {
         this.$router.push({name:'BusinessDetails',params:{id:val}})
+      },
+      async getBusinessListByCategory() {
+        this.loading = true
+        let response = await apiService.get('/businessByCategory',{search:this.categorySearchString,category_id:this.categoryId,location_id:this.location_id})
+        this.list = response?.data[0]
+        this.loading = false
       }
     }
   }

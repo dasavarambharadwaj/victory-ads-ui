@@ -99,6 +99,7 @@ export default {
   methods: {
     askLocation() {
       this.$store.commit('setLocation',"")
+      this.$store.commit('setLocationId',null)
       this.$store.commit('setshowLocationPopup',true)
     },
     toggleRightMenu() {

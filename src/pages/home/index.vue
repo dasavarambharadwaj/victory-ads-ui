@@ -1,12 +1,12 @@
 <template>
   <div class="text-center my-12">
-    <h1 class="lg:text-5xl text-4xl font-bold text-yellow-400 my-3">Search Local Business</h1>
+    <!-- <h1 class="lg:text-5xl text-4xl font-bold text-yellow-400 my-3">Search Local Business</h1> -->
     <div class="w-full lg:w-1/2 text-center inline-block">
       <!-- <VSelect class="my-3" @change="printLocation" v-model="location" :list="locations" item-text="text" item-value="value" placeholder="Select Location" prefixIcon="pin_drop"></VSelect> -->
       <VSelect class="my-3" @change="gotoBusinessPage" :list="businesses" v-model="selectedBusinessId" item-text="name" item-value="id" placeholder="Search Local Business" prefixIcon="search"></VSelect>
     </div>
     </div>
-    <div class="w-full">
+    <div class="w-full flex flex-col items-center ">
       <VCarousel />
     </div>
     <div class="w-full h-96">
