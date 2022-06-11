@@ -27,6 +27,9 @@ export default {
     }
   },
   created() {
+    this.$router.push('/')
+    this.$store.commit('setLocation','')
+    this.$store.commit('setLocationId',null)
     this.getLocationData()
   },
   methods: {

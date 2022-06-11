@@ -3,7 +3,7 @@
       <div tabindex="0" aria-label="card 1" v-for="(item,index) in list" :key="index" @click="BusinessSelected(item.business_id)"
         class="focus:outline-none cursor-pointer lg:w-5/12 2xl:w-3/12 w-full border-4 border-gray-200 text-gray-200 m-2 bg-blue-900  p-6 shadow rounded-md">
         <div class="flex items-center border-b border-gray-200  pb-6">
-          <span class="material-symbols-outlined text-6xl">{{item.icon || 'local_hospital'}}</span>
+          <span class="material-symbols-outlined text-6xl">{{item?.UI_config?.icon || 'local_hospital'}}</span>
           <div class="flex items-start justify-between w-full">
             <div class="pl-3 w-full">
               <p tabindex="0" class="focus:outline-none text-xl font-bold text-white leading-5 ">

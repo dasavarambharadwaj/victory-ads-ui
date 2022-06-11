@@ -41,8 +41,8 @@ import apiService from '@/services/apiService'
       await this.getCategories()
     },
     methods: {
-      categorySelected(value) {
-      this.$router.push({name:'Category',params:{id:value}})
+      categorySelected(value,name) {
+      this.$router.push({name:'Category',params:{id:value,name:name}})
       },
       async getCategories() {
         this.loading = true

@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-wrap justify-center">
-      <div tabindex="0" aria-label="card 1" v-for="(item,index) in list" :key="index" @click="CategorySelected(item.category_id)"
+      <div tabindex="0" aria-label="card 1" v-for="(item,index) in list" :key="index" @click="CategorySelected(item.category_id,item.category_name)"
         class="focus:outline-none cursor-pointer lg:w-5/12 2xl:w-3/12 w-full border-4 border-gray-200 text-gray-200 m-2 bg-blue-900  p-6 shadow rounded-md">
         <div class="flex items-center pb-6">
           <span class="material-symbols-outlined text-6xl">{{item.UI_config.icon || 'store'}}</span>
@@ -30,8 +30,8 @@ export default {
     }
   },
   methods:{
-    CategorySelected(value) {
-      this.$emit("selected",value)
+    CategorySelected(value,name) {
+      this.$emit("selected",value,name)
     }
   }
 }

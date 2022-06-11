@@ -2,9 +2,9 @@
 <section class="text-gray-200 body-font overflow-hidden">
   <div class="container px-5 py-24 mx-auto">
     <div class="lg:w-4/5 mx-auto flex flex-wrap">
-      <img alt="Image" class="lg:w-1/2 w-full object-cover object-center rounded-md border border-gray-200" src="">
+      <img alt="Image" class="lg:w-1/2 lg:block hidden w-full object-cover object-center rounded-md border border-gray-200" src="">
       <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
-        <h2 class="text-sm title-font tracking-widest">Hospital</h2>
+        <h2 class="text-sm title-font tracking-widest">{{data.category_name}}</h2>
         <h1 class="lg:text-5xl text-4xl title-font font-medium mb-1 text-yellow-400">{{data.business_name}}</h1>
         <div class="flex mb-4">
             <span class="flex items-center">
@@ -64,7 +64,7 @@ import apiService from '@/services/apiService'
     methods:{
       async getBusinessDetailsById() {
         let response = await apiService.get('/businessDetails',{business_id:this.id})
-        this.data = response?.data[0]
+        this.data = response?.data[0][0]
       }
     }
   }

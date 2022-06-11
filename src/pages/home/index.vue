@@ -1,22 +1,21 @@
 <template>
-  <div class="text-center my-12">
+  <div class="text-center flex lg:flex-col flex-col-reverse items-center  mt-6">
     <!-- <h1 class="lg:text-5xl text-4xl font-bold text-yellow-400 my-3">Search Local Business</h1> -->
-    <div class="w-full lg:w-1/2 text-center inline-block">
+    <div class="w-full lg:w-1/2 text-center mb-6 inline-block">
       <!-- <VSelect class="my-3" @change="printLocation" v-model="location" :list="locations" item-text="text" item-value="value" placeholder="Select Location" prefixIcon="pin_drop"></VSelect> -->
-      <VSelect class="my-3" @change="gotoBusinessPage" :list="businesses" v-model="selectedBusinessId" item-text="name" item-value="id" placeholder="Search Local Business" prefixIcon="search"></VSelect>
+      <VSelect @textChanged="search" class="my-3" @change="gotoBusinessPage" :list="businesses" v-model="selectedId" item-text="name" item-value="id" placeholder="Search Local Business" prefixIcon="search"></VSelect>
     </div>
-    </div>
-    <div class="w-full flex flex-col items-center ">
+    <div class="w-full flex mb-6 flex-col items-center ">
       <VCarousel />
     </div>
-    <div class="w-full h-96">
-    </div>
+  </div>
 </template>
 
 <script>
 import VSelect from '@/components/vSelect'
 import VCarousel from '@/components/vCarousel'
 import {mapState} from 'vuex'
+import apiService from '@/services/apiService'
 export default {
   name: 'HomePage',
   props: {
@@ -27,97 +26,46 @@ export default {
     VCarousel
   },
   computed: mapState([
-    'location'
+    'location',
+    'location_id'
   ]),
   data() {
     return {
-      locations: [{
-          text: "Sangareddy",
-          value: "sangareddy"
-        },
-        {
-          text: "Zaheerabad",
-          value: "zaheerabad"
-        },
-        {
-          text: "Sadasivapet",
-          value: "sadasivapet"
-        },
-        {
-          text: "Patancheru",
-          value: "patancheru"
-        },
-        {
-          text: "Ram Chandra Puram",
-          value: "Ram Chandra Puram"
-        },
-        {
-          text: "Jogipet",
-          value: "Jogipet"
-        },
-        {
-          text: "Narayankhed",
-          value: "Narayankhed"
-        }
+      businesses: [
       ],
-      businesses: [{
-          id: 0,
-          name: "Multi Speciality Hospital 1",
-          address: "Beside New Bus-stand, Shantinagar, Sangareddy, Telangana, 502001",
-          icon: "local_hospital"
-        },
-        {
-          id: 1,
-          name: "Children's Multi Speciality Hospital 1",
-          address: "Beside New Bus-stand, Shantinagar, Sangareddy, Telangana, 502001",
-          icon: "local_hospital"
-        },
-        {
-          id: 2,
-          name: "Multi Speciality Hospital 2",
-          address: "Beside New Bus-stand, Shantinagar, Sangareddy, Telangana, 502001",
-          icon: "local_hospital"
-        },
-        {
-          id: 3,
-          name: "Multi Speciality Hospital 3",
-          address: "Beside New Bus-stand, Shantinagar, Sangareddy, Telangana, 502001",
-          icon: "local_hospital"
-        },
-        {
-          id: 4,
-          name: "Multi Speciality Hospital 4",
-          address: "Beside New Bus-stand, Shantinagar, Sangareddy, Telangana, 502001",
-          icon: "local_hospital"
-        },
-        {
-          id: 5,
-          name: "Multi Speciality Hospital 5",
-          address: "Beside New Bus-stand, Shantinagar, Sangareddy, Telangana, 502001",
-          icon: "local_hospital"
-        },
-        {
-          id: 6,
-          name: "Multi Speciality Hospital 6",
-          address: "Beside New Bus-stand, Shantinagar, Sangareddy, Telangana, 502001",
-          icon: "local_hospital"
-        },
-        {
-          id: 7,
-          name: "Diagnostic center",
-          address: "Beside New Bus-stand, Shantinagar, Sangareddy, Telangana, 502001",
-          icon: "local_hospital"
-        }
-      ],
-      selectedBusinessId: null
+      selectedId: -1,
+      timeout:null
     }
   },
   methods: {
     gotoBusinessPage() {
-      if(this.selectedBusinessId) {
-        this.$router.push({name:'BusinessDetails',params:{id:this.selectedBusinessId}})
+      if(this.selectedId) {
+        let id = parseInt(this.selectedId)
+        let object = this.businesses.filter(item=> item.id === id)
+        if(object.length > 0) {
+          if(object[0].is_category) {
+            this.$router.push({name:'Category',params:{id:id,name:object[0].name}})
+          } else {
+            this.$router.push({name:'BusinessDetails',params:{id:id}})
+          }
+        }
       }
-
+    },
+    async search(val) {
+      if (this.timeout) {
+        clearTimeout(this.timeout)
+      }
+      this.timeout = setTimeout(async() => {
+        if (val.length > 2) {
+          let response = await apiService.get('/search', {
+            search: val,
+            location_id: this.location_id
+          })
+          this.businesses = response?.data[0]
+        } else {
+          this.businesses = []
+        }
+      }, 300);
     }
   }
 }
