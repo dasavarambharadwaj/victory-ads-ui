@@ -5,6 +5,7 @@ import AddBusinessPage from "@/pages/addBusiness";
 import CategoriesPage from '@/pages/categoryList';
 import SubCategoryPage from '@/pages/category';
 import BusinessDetails from '@/pages/businessDetails';
+import PageNotFound from '@/pages/notFound'
 
 const routes = [
   {
@@ -23,7 +24,7 @@ const routes = [
     component: CategoriesPage,
   },
   {
-    path: "/category/:id",
+    path: "/category/:id/:name",
     name: "Category",
     component: SubCategoryPage,
   },
@@ -37,6 +38,10 @@ const routes = [
     name: "AddBusiness",
     component: AddBusinessPage,
   },
+  {
+    path:'/:pathMatch(.*)*',
+    component:PageNotFound
+  }
 ];
 
 const router = createRouter({

@@ -9,7 +9,7 @@
         <div class="text-gray-200">or</div>
         <div class="border my-4 mx-2 grow"></div>
       </div>
-    <v-select class="mb-20" @change="locationChanged" placeholder="Select Location" prefixIcon="pin_drop" v-model="locationId" :list="locations" item-text="location_name" item-value="location_id" size="medium"></v-select>
+    <v-select class="mb-20" @textChanged="getLocationData" @change="locationChanged" placeholder="Select Location" prefixIcon="pin_drop" v-model="locationId" :list="locations" item-text="location_name" item-value="location_id" size="medium"></v-select>
 </div>
 </template>
 <script>
@@ -27,22 +27,28 @@ export default {
     }
   },
   created() {
-    this.$router.push('/')
     this.$store.commit('setLocation','')
     this.$store.commit('setLocationId',null)
-    this.getLocationData()
+    this.getLocationData('')
   },
   methods: {
     locationChanged(text) {
-      this.$store.commit('setLocation',text)
-      this.$store.commit('setLocationId',this.locationId)
-      setTimeout(() => {
-        this.$emit('change')        
-      }, 500);
+      // eslint-disable-next-line
+      debugger
+      if(typeof text == "string") {
+        this.$store.commit('setLocation',text)
+        this.$store.commit('setLocationId',this.locationId)
+        setTimeout(() => {
+          this.$emit('change')
+        }, 500);
+      }
     },
-    async getLocationData() {
-      let response = await apiService.get('/locations',{search:this.categorySearchString})
-      this.locations = response?.data[0]
+    async getLocationData(search) {
+      if(typeof search =="string") {
+        let response = await apiService.get('/locations',{search:search})
+        this.locations = response?.data[0]
+      }
+      
     }
   }
 

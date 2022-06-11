@@ -5,7 +5,7 @@
       <NavBar />
     </div>
     <div class=" flex-grow overflow-y-auto">
-    <div id="main-content" class="min-h-full p-2">
+    <div id="main-content" class="min-h-full p-2" :key="refreshComponent">
       <router-view />
     </div>
     <div id="footer-container">
@@ -31,6 +31,7 @@ export default {
   name: 'App',
   data() {
     return {
+      refreshComponent: 0
     }
   },
   components: {
@@ -48,6 +49,7 @@ export default {
   methods:{
     checkLocation() {
       this.$store.commit('setshowLocationPopup',this.location === "")
+      this.refreshComponent += 1
     }
   }
 }

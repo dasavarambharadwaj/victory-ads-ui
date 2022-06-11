@@ -56,7 +56,7 @@ export default {
         clearTimeout(this.timeout)
       }
       this.timeout = setTimeout(async() => {
-        if (val.length > 2) {
+        if (val.length > 2 && this.location_id) {
           let response = await apiService.get('/search', {
             search: val,
             location_id: this.location_id

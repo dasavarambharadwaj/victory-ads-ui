@@ -63,8 +63,10 @@ import apiService from '@/services/apiService'
     },
     methods:{
       async getBusinessDetailsById() {
-        let response = await apiService.get('/businessDetails',{business_id:this.id})
-        this.data = response?.data[0][0]
+        if(this.id) {
+          let response = await apiService.get('/businessDetails',{business_id:this.id})
+          this.data = response?.data[0][0]
+        }
       }
     }
   }

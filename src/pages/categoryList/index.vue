@@ -4,7 +4,7 @@
     <div class="flex flex-col justify-between">
       <div class="flex lg:justify-between flex-col lg:flex-row items-center">
         <h2 class="text-4xl text-yellow-400 lg:text-5xl font-bold leading-tight mb-4">Categories</h2>
-        <v-input placeholder="Search Hospitals" prefixIcon="search" size="small" class=" lg:w-1/4 w-full mx-2"
+        <v-input placeholder="Search" prefixIcon="search" size="small" class=" lg:w-1/4 w-full mx-2"
           v-model="categorySearchString" @change="getCategories"></v-input>
       </div>
       <div class="mt-8 text-center hidden lg:block">
