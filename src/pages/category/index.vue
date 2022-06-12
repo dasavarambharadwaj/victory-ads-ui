@@ -13,7 +13,10 @@
     </div>
     <div class="rounded-md p-2  text-gray-200">
       <div v-if="loading">Loading</div>
-      <div v-else-if="list.length === 0">No data available</div>
+      <div v-else-if="list.length === 0" class=" flex items-center flex-col max-w-xs m-auto">
+        <h1 class=" text-4xl font-bold text-gray-200 mb-4">No Data</h1>
+        <no-data></no-data>
+      </div>
       <div v-else>
         <v-category-list @selected="BusinessSelected" :list="list"></v-category-list>
       </div>
@@ -26,6 +29,7 @@ import VInput from '@/components/vInput.vue'
 import VCategoryList from './components/vCategoryList.vue'
 import apiService from '@/services/apiService'
 import {mapState} from 'vuex'
+import noData from '@/assets/illustrations/noData.vue'
   export default {
     name: 'subCategoryPage',
     data() {
@@ -39,7 +43,8 @@ import {mapState} from 'vuex'
     },
     components:{
       VInput,
-        VCategoryList
+      VCategoryList,
+      noData
     },
     created() {
         this.categoryId = this.$route.params.id

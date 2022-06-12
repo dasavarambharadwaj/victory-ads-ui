@@ -33,8 +33,6 @@ export default {
   },
   methods: {
     locationChanged(text) {
-      // eslint-disable-next-line
-      debugger
       if(typeof text == "string") {
         this.$store.commit('setLocation',text)
         this.$store.commit('setLocationId',this.locationId)

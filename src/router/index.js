@@ -47,6 +47,12 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
+  scrollBehavior() {
+    let container = document.querySelector(".router-scroll-container")
+    if(container) {
+      container.scrollTop = 0
+    }
+  },
 });
 
 export default router;

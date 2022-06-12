@@ -4,17 +4,17 @@
     <div id="nav-bar-container">
       <NavBar />
     </div>
-    <div class=" flex-grow overflow-y-auto">
-    <div id="main-content" class="min-h-full p-2" :key="refreshComponent">
-      <router-view />
-    </div>
-    <div id="footer-container">
-      <v-footer></v-footer>
-    </div>
+    <div class=" flex-grow overflow-y-auto router-scroll-container" v-if="!showLocationPopup">
+      <div id="main-content" class="min-h-full p-2" :key="refreshComponent">
+        <router-view />
+      </div>
+      <div id="footer-container">
+        <v-footer></v-footer>
+      </div>
     </div>
   </div>
 </div>
-<div class="fixed w-full h-full top-0 z-30 bg-gray-900 bg-opacity-75 overflow-auto" v-if="showLocationPopup">
+<div class="fixed w-full h-full top-0 z-30 bg-gray-900 bg-opacity-0 overflow-auto" v-if="showLocationPopup">
   <div class="bg-white w-[calc(100%-20px)] max-w-md rounded-md m-auto mt-32">
     <ask-location @change="checkLocation"></ask-location>
   </div>

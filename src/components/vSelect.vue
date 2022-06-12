@@ -1,7 +1,7 @@
 <template>
   <div class="w-full relative" v-click-outside="closeDropdown">
     <VInput v-model="showValue" @change="textChange" :size="size" :key="refreshInputField" @click="openDropdown" :placeholder="placeholder" :label="label" :prefixIcon="prefixIcon" :suffixIcon="showDropdown ? 'arrow_drop_up' : 'arrow_drop_down'"></VInput>
-    <div v-if="showDropdown" @input="showDropdown" class="absolute z-10 text-gray-900 rounded-md shadow-2xl w-[calc(100%-1rem)] p-2 m-2 bg-gray-200">
+    <div v-if="showDropdown" @input="showDropdown" class="absolute z-10 text-gray-900 rounded-md shadow-2xl max-h-60 overflow-auto w-[calc(100%-1rem)] p-2 m-2 bg-gray-200">
       <div v-if="list.length === 0 && showValue.length < 3">Type atleast 3 characters to search</div>
       <div v-if="list.length === 0 && showValue.length > 2">No data</div>
       <ul class="text-left" @click="selectionChanged">

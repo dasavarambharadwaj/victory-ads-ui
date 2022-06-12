@@ -2,13 +2,13 @@
 <section class="text-gray-200 body-font overflow-hidden">
   <div class="container px-5 py-24 mx-auto">
     <div class="lg:w-4/5 mx-auto flex flex-wrap">
-      <img alt="Image" class="lg:w-1/2 lg:block hidden w-full object-cover object-center rounded-md border border-gray-200" src="">
+      <img alt="Image" class="lg:w-1/2 lg:block  w-full h-96 object-cover object-center rounded-md border border-gray-200" src="">
       <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
         <h2 class="text-sm title-font tracking-widest">{{data.category_name}}</h2>
         <h1 class="lg:text-5xl text-4xl title-font font-medium mb-1 text-yellow-400">{{data.business_name}}</h1>
         <div class="flex mb-4">
             <span class="flex items-center">
-                <span class="material-symbols-outlined cursor-pointer">call</span>
+                <span class="material-symbols-outlined cursor-pointer" @click="showPhoneNumbers">call</span>
                 <span class="material-symbols-outlined ml-4 cursor-pointer">mail</span>
                 <span class="material-symbols-outlined ml-4 cursor-pointer">pin_drop</span>
                 <span class="material-symbols-outlined ml-4 cursor-pointer">language</span>
@@ -41,6 +41,21 @@
     </div>
   </div>
 </section>
+  <div class="absolute w-full h-full top-0 z-30 left-0 right-0 bg-gray-900 bg-opacity-75 m-auto overflow-auto" @click="hidePhoneNumbers" v-if="showPhoneNumber">
+    <div class="bg-gray-900 border border-gray-200 w-[calc(100%-20px)] max-w-md rounded-md m-auto mt-32 p-4" @click.stop="">
+      <div class="text-gray-200 text-center text-2xl mb-4 font-bold">Phone Numbers</div>
+      <a class="text-gray-200 flex items-center justify-between p-2 m-2 border-gray-200" :href="'tel://'+item" v-for="(item,key,index) in data.ph_no" :key="index">
+        <div class="flex">
+          <span class="mr-4">{{(index+1)+'.'}}</span>
+          <span>{{item}}</span>
+        </div>
+        <div class="relative flex items-center">
+          <span class="material-symbols-outlined cursor-pointer mr-4" v-if="copied !== key" @click.prevent="copyByKey(key)">content_copy</span>
+          <span class="material-symbols-outlined cursor-pointer mr-4 text-green-500" v-if="copied === key">check_circle</span>
+        </div>
+    </a>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -50,7 +65,9 @@ import apiService from '@/services/apiService'
     data() {
         return {
             id:null,
-            data:{}
+            data:{},
+            showPhoneNumber: false,
+            copied: 0
         }
     },
     props: {
@@ -62,6 +79,20 @@ import apiService from '@/services/apiService'
         this.getBusinessDetailsById()
     },
     methods:{
+      copyByKey(key) {
+        navigator.clipboard.writeText(this.data.ph_no[key])
+        this.copied = key;
+        setTimeout(() => {
+          this.copied = 0
+        }, 2000);
+      },
+      async showPhoneNumbers() {
+        console.log(this.data)
+        this.showPhoneNumber = true
+      },
+      hidePhoneNumbers() {
+        this.showPhoneNumber = false
+      },
       async getBusinessDetailsById() {
         if(this.id) {
           let response = await apiService.get('/businessDetails',{business_id:this.id})
