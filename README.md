@@ -1,4 +1,4 @@
-# victory-ads-ui
+# victory ads UI
 
 ## Project setup
 ```

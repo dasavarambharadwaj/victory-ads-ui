@@ -1,8 +1,17 @@
 <template>
 <section class="text-gray-200 body-font overflow-hidden">
   <div class="container px-5 py-24 mx-auto">
-    <div class="lg:w-4/5 mx-auto flex flex-wrap">
-      <img alt="Image" class="lg:w-1/2 lg:block  w-full h-96 object-cover object-center rounded-md border border-gray-200" src="">
+    <div class="lg:w-4/5 mx-auto flex flex-wrap justify-center">
+      <div  class="lg:w-1/2 w-full max-w-sm">
+        <div class="dui-carousel dui-carousel-center rounded-md w-full">
+          <div :id="'item'+(index+1)" class="dui-carousel-item w-full" v-for="(item,index) in images" :key="index">
+            <img :src="getUrlByName(item.image_location)" :alt="item.image_name" class="lg:block  w-full object-cover object-center rounded-md border border-gray-200" />
+          </div> 
+        </div> 
+        <div class="flex justify-center w-full py-2 gap-2">
+          <a :href="'#item'+(index+1)" v-for="(item,index) in images" :key="index" class="dui-btn dui-btn-xs">{{index+1}}</a> 
+        </div>
+      </div>
       <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
         <h2 class="text-sm title-font tracking-widest">{{data.category_name}}</h2>
         <h1 class="lg:text-5xl text-4xl title-font font-medium mb-1 text-yellow-400">{{data.business_name}}</h1>
@@ -34,7 +43,7 @@
         </span>
         <div class="flex mt-6 items-center pb-5 mb-5">
         <p class="leading-relaxed">
-            No extra info available
+            {{data.UI_config?.info}}
         </p>
         </div>
       </div>
@@ -67,7 +76,8 @@ import apiService from '@/services/apiService'
             id:null,
             data:{},
             showPhoneNumber: false,
-            copied: 0
+            copied: 0,
+            images:[]
         }
     },
     props: {
@@ -77,8 +87,12 @@ import apiService from '@/services/apiService'
     created() {
         this.id = this.$route.params.id
         this.getBusinessDetailsById()
+        this.getImagesById()
     },
     methods:{
+      getUrlByName(name) {
+        return process.env.VUE_APP_BACKEND_URL + "/image/" + name
+      },
       copyByKey(key) {
         navigator.clipboard.writeText(this.data.ph_no[key])
         this.copied = key;
@@ -97,6 +111,12 @@ import apiService from '@/services/apiService'
         if(this.id) {
           let response = await apiService.get('/businessDetails',{business_id:this.id})
           this.data = response?.data[0][0]
+        }
+      },
+      async getImagesById() {
+        if(this.id) {
+          let response = await apiService.get('/getImagesByBusinessId',{business_id:this.id})
+          this.images = response?.data[0]
         }
       }
     }

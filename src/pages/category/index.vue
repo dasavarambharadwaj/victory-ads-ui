@@ -5,7 +5,7 @@
       <div class="flex lg:justify-between flex-col lg:flex-row items-center">
         <h2 class="text-4xl text-yellow-400 lg:text-5xl font-bold leading-tight mb-4">{{categoryName}}</h2>
         <v-input placeholder="Search" prefixIcon="search" size="small" class=" lg:w-1/4 w-full mx-2"
-          v-model="categorySearchString"></v-input>
+          v-model="categorySearchString" @change="getBusinessListByCategory"></v-input>
       </div>
       <div class="mt-8 text-center hidden lg:block">
         <contact-us></contact-us>
@@ -38,6 +38,7 @@ import noData from '@/assets/illustrations/noData.vue'
             categoryName: "",
             categorySearchString:"",
             list: [],
+            timeout:null,
             loading:false
         }
     },
@@ -61,9 +62,19 @@ import noData from '@/assets/illustrations/noData.vue'
       async getBusinessListByCategory() {
         if(this.categoryId && this.location_id) {
           this.loading = true
-          let response = await apiService.get('/businessByCategory',{search:this.categorySearchString,category_id:this.categoryId,location_id:this.location_id})
-          this.list = response?.data[0]
-          this.loading = false
+          if(this.timeout) {
+            clearTimeout(this.timeout);
+          }
+          try {
+            this.timeout = setTimeout(async () => {
+            let response = await apiService.get('/businessByCategory',{search:this.categorySearchString,category_id:this.categoryId,location_id:this.location_id})
+            this.list = response?.data[0]
+            this.loading = false
+          },300)
+          } catch(e) {
+            this.loading = false
+            this.list = []
+          }
         }
       }
     }

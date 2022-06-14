@@ -1,27 +1,110 @@
 <template>
-  <div class="flex-row m-auto w-full bg-red-300 justify-between lg:justify-center items-center rounded-lg border border-gray-200 p-8 flex ">
-    <div class=" max-w-[160px] w-1/5">
-      <announce-icon></announce-icon>
-    </div>
-    <div class="flex flex-col">
-    <div class="text-center flex flex-col flex-grow">
-      <div>
-        <h1 class="text-xl md:text-2xl lg:text-4xl  text-red-800 font-bold">Show Your Ad Here</h1>
-        <p class="mx-auto mt-2 md:text-sm text-xs lg:text-md text-gray-800">Contact Us to display your business advertisement.</p>
-      </div>
-      <router-link to="/about">
-      <button class="mt-2 rounded-md bg-transparent px-8 py-4 font-medium  transition-colors bg-red-800 text-white disabled:opacity-50">Contact Us</button>
-      </router-link>
-    </div>
-    </div>
-  </div>
+	<div class="w-full">
+		<div class="relative w-full transition-all delay-500"  @mousedown="sliderStop" @mouseup="sliderStart" v-for="(item, index) in ads" :key="index" v-show="showIndex === index">
+			<component :is="item"></component>
+			<div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+				<a  @click="back" class=" cursor-pointer material-symbols-outlined p-2 rounded-full bg-gray-900">chevron_left</a> 
+				<a @click="front" class="material-symbols-outlined cursor-pointer  p-2 rounded-full bg-gray-900">chevron_right</a>
+			</div>
+		</div>
+	</div>
 </template>
 <script>
-import AnnounceIcon from '@/assets/illustrations/announceIcon.vue'
+import {Ad_1,Ad_2} from '@/scrollAds'
 export default {
   name:"VCarousel",
   components:{
-    AnnounceIcon
+    Ad_1,
+    Ad_2
+  },
+  data() {
+    return {
+      showIndex: 0,
+      ads:[
+        'Ad_1',
+        'Ad_2'
+      ],
+      slideInverval: null
+    }
+  },
+  created() {
+    this.ads = this.shuffleArray(this.ads)
+    this.sliderStart()
+    
+  },
+  methods:{
+    sliderStart() {
+      this.slideInverval = setInterval(() => {
+        if(this.showIndex == this.ads.length - 1) {
+          this.showIndex = 0
+        } else {
+          this.showIndex += 1
+        }
+      }, 5000);
+    },
+    sliderStop() {
+      if(this.slideInverval) {
+        clearInterval(this.slideInverval)
+      }
+    },
+    back() {
+      this.sliderStop()
+      if(this.showIndex == 0) {
+        this.showIndex = this.ads.length -1
+      } else {
+        this.showIndex -= 1;
+      }
+      this.sliderStart()
+    },
+    front() {
+      this.sliderStop()
+      if(this.showIndex == this.ads.length - 1) {
+        this.showIndex = 0
+      } else {
+        this.showIndex += 1
+      }
+      this.sliderStart()
+    },
+    shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array
+
+}
   }
+  
 }
 </script>
+<style scoped>
+			.carousel-open:checked + .carousel-item {
+				position: static;
+				opacity: 100;
+			}
+			.carousel-item {
+				-webkit-transition: opacity 0.6s ease-out;
+				transition: opacity 0.6s ease-out;
+			}
+			#carousel-1:checked ~ .control-1,
+			#carousel-2:checked ~ .control-2,
+			#carousel-3:checked ~ .control-3 {
+				display: block;
+			}
+			.carousel-indicators {
+				list-style: none;
+				margin: 0;
+				padding: 0;
+				position: absolute;
+				bottom: 2%;
+				left: 0;
+				right: 0;
+				text-align: center;
+				z-index: 10;
+			}
+			#carousel-1:checked ~ .control-1 ~ .carousel-indicators li:nth-child(1) .carousel-bullet,
+			#carousel-2:checked ~ .control-2 ~ .carousel-indicators li:nth-child(2) .carousel-bullet,
+			#carousel-3:checked ~ .control-3 ~ .carousel-indicators li:nth-child(3) .carousel-bullet {
+				color: #2b6cb0;  /*Set to match the Tailwind colour you want the active one to be */
+			}
+		</style>

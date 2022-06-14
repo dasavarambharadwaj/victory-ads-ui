@@ -4,8 +4,8 @@
       <div class="pl-4 flex items-center">
       <router-link to="/">
       <a class="flex flex-col justify-center self-center items-center font-bold lg:text-3xl">
-        <span class="text-2xl lg:text-4xl text-lg-400 text-cyan-400">Victory Ads</span>
-        <span class="text-sm lg:text-lg">Sangareddy</span>
+        <span class="text-xl lg:text-4xl text-lg-400 text-cyan-400">Victory Ads</span>
+        <span class="text-xs lg:text-lg">Sangareddy</span>
         </a>
       
       </router-link>
@@ -13,7 +13,7 @@
       <div class="flex lg:hidden flex-row items-center">
         <div class="flex justify-center items-center cursor-pointer mr-4" @click="askLocation">
           <span class="material-symbols-outlined text-2xl lg:text-3xl">pin_drop</span>
-          <span class="text-sm">{{location|| 'Select Location'}}</span>
+          <span class="text-sm">{{location|| 'Location'}}</span>
         </div>
         <div class="block lg:hidden pr-4 relative">
           <button id="nav-toggle" @click="toggleRightMenu"
@@ -47,7 +47,7 @@
         <ul class="list-reset lg:flex justify-end flex-1 items-center">
           <li class="mr-3 cursor-pointer flex items-center justify-center" @click="askLocation">
               <span class="material-symbols-outlined text-2xl lg:text-3xl">pin_drop</span>
-              <span class="text-sm">{{location|| 'Select Location'}}</span>
+              <span class="text-sm">{{location|| 'Location'}}</span>
           </li>
           <li class="mr-3">
             <router-link to="/add-business">

@@ -5,8 +5,8 @@
       <span>Sangareddy</span>
       
     </router-link>
-    <p class="py-2 text-gray-800 dark:text-white sm:py-0">2022 &#169; All rights reserved</p>
-    <p class="py-2 text-gray-800 dark:text-white sm:py-0">Terms &amp; conditions</p>
+    <p class="py-2 text-gray-200 sm:py-0">2022 &#169; All rights reserved</p>
+    <p class="py-2 text-gray-200 sm:py-0">Terms &amp; conditions</p>
   </footer>
 </template>
 <script>
