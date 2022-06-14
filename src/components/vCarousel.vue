@@ -2,7 +2,7 @@
 	<div class="w-full">
 		<div class="relative w-full transition-all delay-500"  @mousedown="sliderStop" @mouseup="sliderStart" v-for="(item, index) in ads" :key="index" v-show="showIndex === index">
 			<component :is="item"></component>
-			<div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+			<div class="absolute flex invisible justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
 				<a  @click="back" class=" cursor-pointer material-symbols-outlined p-2 rounded-full bg-gray-900">chevron_left</a> 
 				<a @click="front" class="material-symbols-outlined cursor-pointer  p-2 rounded-full bg-gray-900">chevron_right</a>
 			</div>
