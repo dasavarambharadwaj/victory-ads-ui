@@ -3,7 +3,7 @@
     class="max-w-screen-2xl mb-8 mt-24 px-8 grid gap-8 md:px-12 lg:px-16 xl:px-32 py-16 mx-auto bg-blue-900 text-gray-200 rounded-lg shadow-lg">
     <div class="flex flex-col justify-between">
       <div class="flex lg:justify-between flex-col lg:flex-row items-center">
-        <h2 class="text-4xl text-yellow-400 lg:text-5xl font-bold leading-tight mb-4">{{categoryName}}</h2>
+        <h2 class="text-4xl text-yellow-400 lg:text-5xl font-bold leading-tight mb-4">{{ categoryName }}</h2>
         <v-input placeholder="Search" prefixIcon="search" size="small" class=" lg:w-1/4 w-full mx-2"
           v-model="categorySearchString" @change="getBusinessListByCategory"></v-input>
       </div>
@@ -28,55 +28,55 @@
 import VInput from '@/components/vInput.vue'
 import VCategoryList from './components/vCategoryList.vue'
 import apiService from '@/services/apiService'
-import {mapState} from 'vuex'
+import { mapState } from 'vuex'
 import noData from '@/assets/illustrations/noData.vue'
-  export default {
-    name: 'subCategoryPage',
-    data() {
-        return {
-            categoryId:null,
-            categoryName: "",
-            categorySearchString:"",
-            list: [],
-            timeout:null,
-            loading:false
+export default {
+  name: 'subCategoryPage',
+  data() {
+    return {
+      categoryId: null,
+      categoryName: "",
+      categorySearchString: "",
+      list: [],
+      timeout: null,
+      loading: false
+    }
+  },
+  components: {
+    VInput,
+    VCategoryList,
+    noData
+  },
+  created() {
+    this.categoryId = this.$route.params.id
+    this.categoryName = this.$route.params.name
+    this.getBusinessListByCategory()
+  },
+  computed: mapState([
+    'location_id'
+  ]),
+  methods: {
+    BusinessSelected(val) {
+      this.$router.push({ name: 'BusinessDetails', params: { id: val } })
+    },
+    async getBusinessListByCategory() {
+      if (this.categoryId && this.location_id) {
+        this.loading = true
+        if (this.timeout) {
+          clearTimeout(this.timeout);
         }
-    },
-    components:{
-      VInput,
-      VCategoryList,
-      noData
-    },
-    created() {
-        this.categoryId = this.$route.params.id
-        this.categoryName = this.$route.params.name
-        this.getBusinessListByCategory()
-    },
-    computed: mapState([
-      'location_id'
-    ]),
-    methods:{
-      BusinessSelected(val) {
-        this.$router.push({name:'BusinessDetails',params:{id:val}})
-      },
-      async getBusinessListByCategory() {
-        if(this.categoryId && this.location_id) {
-          this.loading = true
-          if(this.timeout) {
-            clearTimeout(this.timeout);
-          }
-          try {
-            this.timeout = setTimeout(async () => {
-            let response = await apiService.get('/businessByCategory',{search:this.categorySearchString,category_id:this.categoryId,location_id:this.location_id})
+        try {
+          this.timeout = setTimeout(async () => {
+            let response = await apiService.get('/businessByCategory', { search: this.categorySearchString, category_id: this.categoryId, location_id: this.location_id })
             this.list = response?.data[0]
             this.loading = false
-          },300)
-          } catch(e) {
-            this.loading = false
-            this.list = []
-          }
+          }, 300)
+        } catch (e) {
+          this.loading = false
+          this.list = []
         }
       }
     }
   }
+}
 </script>

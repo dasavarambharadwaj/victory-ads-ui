@@ -21,50 +21,50 @@
 import VInput from '@/components/vInput'
 import VSelector from '@/pages/categoryList/components/vSelector.vue'
 import apiService from '@/services/apiService'
-  export default {
-    name: 'categoriesPage',
-    data() {
-        return {
-            categorySearchString:'',
-            categoriesList:[],
-            timeout:null,
-            loading: false
-        }
+export default {
+  name: 'categoriesPage',
+  data() {
+    return {
+      categorySearchString: '',
+      categoriesList: [],
+      timeout: null,
+      loading: false
+    }
+  },
+  props: {
+  },
+  components: {
+    VInput,
+    VSelector
+  },
+  async created() {
+    await this.getCategories()
+  },
+  methods: {
+    categorySelected(value, name) {
+      this.$router.push({ name: 'Category', params: { id: value, name: name } })
     },
-    props: {
-    },
-    components:{
-        VInput,
-        VSelector
-    },
-    async created(){
-      await this.getCategories()
-    },
-    methods: {
-      categorySelected(value,name) {
-      this.$router.push({name:'Category',params:{id:value,name:name}})
-      },
-      async getCategories() {
-        this.loading = true
-        if(this.timeout) {
-          clearTimeout(this.timeout);
-        }
-        this.timeout = setTimeout(async () => {
-          try {
-            let response = await apiService.get('/categories',{search:this.categorySearchString})
-            if(response.data) {
-              this.categoriesList = response?.data[0]
-            } else {
-              this.categoriesList = []
-            }
-          } catch(e) {
+    async getCategories() {
+      this.loading = true
+      if (this.timeout) {
+        clearTimeout(this.timeout);
+      }
+      this.timeout = setTimeout(async () => {
+        try {
+          let response = await apiService.get('/categories', { search: this.categorySearchString })
+          if (response.data) {
+            this.categoriesList = response?.data[0]
+          } else {
             this.categoriesList = []
           }
-          this.loading = false
-        }, 300);
-        
-        
-      }
+        } catch (e) {
+          this.categoriesList = []
+        }
+        this.loading = false
+      }, 300);
+
+
     }
   }
+}
 </script>

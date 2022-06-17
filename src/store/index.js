@@ -1,24 +1,24 @@
-import { createStore } from 'vuex'
+import { createStore } from "vuex";
 
 // Create a new store instance.
 const store = createStore({
-  state () {
+  state() {
     return {
       location: "",
       location_id: null,
       showLocationPopup: false,
-    }
+    };
   },
   mutations: {
-    setLocation(state,location) {
-        state.location = location
+    setLocation(state, location) {
+      state.location = location;
     },
-    setLocationId(state,location_id) {
-      state.location_id = location_id
+    setLocationId(state, location_id) {
+      state.location_id = location_id;
     },
-    setshowLocationPopup(state,show) {
-      state.showLocationPopup = show
-    }
-  }
-})
+    setshowLocationPopup(state, show) {
+      state.showLocationPopup = show;
+    },
+  },
+});
 export default store;
