@@ -11,4 +11,12 @@ export default {
       return null;
     }
   },
+  async post(url, data) {
+    try {
+      const response = await axios.post(process.env.VUE_APP_BACKEND_URL + url, data)
+      return response
+    } catch (error) {
+      return null
+    }
+  }
 };

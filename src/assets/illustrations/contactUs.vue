@@ -1,5 +1,5 @@
 <template>
-<svg xmlns="http://www.w3.org/2000/svg" class=" max-h-96 m-auto" data-name="Layer 1" viewBox="0 0 522.70767 519.89075"
+<svg xmlns="http://www.w3.org/2000/svg" class=" max-h-96 m-auto" data-name="Layer 1" viewBox="0 0 380.70767 524.89075"
     xmlns:xlink="http://www.w3.org/1999/xlink">
     <path
         d="M686.31988,709.94537H367.17724a28.56333,28.56333,0,0,1-28.53107-28.53107V218.5857a28.56333,28.56333,0,0,1,28.53107-28.53107H686.31988A28.56334,28.56334,0,0,1,714.851,218.5857V681.4143A28.56334,28.56334,0,0,1,686.31988,709.94537Z"

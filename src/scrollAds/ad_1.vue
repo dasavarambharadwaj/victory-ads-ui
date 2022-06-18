@@ -7,8 +7,8 @@
 			<div class="flex flex-col">
 				<div class="text-center flex flex-col flex-grow">
 					<div>
-						<h1 class="text-xl md:text-2xl lg:text-4xl  text-red-800 font-bold">Show Your Ad Here</h1>
-						<p class="mx-auto mt-2 md:text-sm text-xs lg:text-md text-gray-800">Contact Us to display your business
+						<h1 class="lg:text-xl  text-red-800 font-bold">Show Your Ad Here</h1>
+						<p class="mx-auto mt-2 text-xs text-gray-800">Contact Us to display your business
 							advertisement.</p>
 					</div>
 					<router-link to="/about">

@@ -3,8 +3,8 @@
     class=" max-w-screen-2xl mt-24 mb-8 px-8 grid gap-8 grid-cols-1 lg:grid-cols-2 md:px-12 lg:px-16 xl:px-32 py-16 mx-auto bg-blue-900 text-gray-200 rounded-lg shadow-lg">
     <div class="flex flex-col justify-between">
       <div>
-        <h2 class="text-4xl text-yellow-400 lg:text-5xl font-bold leading-tight">Add Business</h2>
-        <div class="mt-8">
+        <h2 class="text-2xl text-yellow-400 font-bold leading-tight text-center">Add Business</h2>
+        <div class="mt-8 text-center">
           Fill out the form to get your business listed on our website.
         </div>
       </div>

@@ -4,7 +4,7 @@
     <div class="w-full lg:w-1/2 text-center mb-6 inline-block">
       <!-- <VSelect class="my-3" @change="printLocation" v-model="location" :list="locations" item-text="text" item-value="value" placeholder="Select Location" prefixIcon="pin_drop"></VSelect> -->
       <VSelect @textChanged="search" class="my-3" @change="gotoBusinessPage" :list="businesses" v-model="selectedId"
-        item-text="name" item-value="id" placeholder="Search Local Business" prefixIcon="search"></VSelect>
+        item-text="name" item-value="id" placeholder="Search Categories" prefixIcon="search"></VSelect>
     </div>
     <div class="w-full flex mb-6 flex-col items-center ">
       <VCarousel />

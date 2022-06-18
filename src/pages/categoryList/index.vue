@@ -3,7 +3,7 @@
     class="max-w-screen-2xl mb-8 mt-24 px-8 grid gap-8 md:px-12 lg:px-16 xl:px-32 py-16 mx-auto bg-blue-900 text-gray-200 rounded-lg shadow-lg">
     <div class="flex flex-col justify-between">
       <div class="flex lg:justify-between flex-col lg:flex-row items-center">
-        <h2 class="text-4xl text-yellow-400 lg:text-5xl font-bold leading-tight mb-4">Categories</h2>
+        <h2 class="text-2xl text-yellow-400 font-bold leading-tight mb-4">Categories</h2>
         <v-input placeholder="Search" prefixIcon="search" size="small" class=" lg:w-1/4 w-full mx-2"
           v-model="categorySearchString" @change="getCategories"></v-input>
       </div>

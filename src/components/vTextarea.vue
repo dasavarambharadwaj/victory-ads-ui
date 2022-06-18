@@ -1,6 +1,6 @@
 <template>
   <div class="w-full">
-    <label v-if="label">{{ label }}</label>
+    <label :class="{'required':required}" v-if="label">{{ label }}</label>
     <div :class="[{ 'p-2': size === 'medium' }, { 'p-1': size === 'small' }, { 'p-3': size === 'large' }]"
       class="mb-2 bg-gray-200 rounded-md text-gray-900 flex flex-row justify-center items-center">
       <textarea rows="3" :class="[{ 'p-2': size === 'medium' }, { 'p-1': size === 'small' }, { 'p-3': size === 'large' }]"
@@ -13,6 +13,10 @@
 export default {
   name: 'vTextarea',
   props: {
+    required:{
+      type: Boolean,
+      default: false
+    },
     modelValue: {
       type: String,
       default: ''
@@ -40,7 +44,7 @@ export default {
   },
   methods: {
     valueChanged(e) {
-      this.$emit('input', e.target.value)
+      this.$emit('update:modelValue', e.target.value)
       this.$emit('change', e.target.value)
     }
   }

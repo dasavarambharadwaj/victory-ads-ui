@@ -15,8 +15,8 @@
           </div>
         </div>
         <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
-          <h2 class="text-sm title-font tracking-widest">{{ data.category_name }}</h2>
-          <h1 class="lg:text-5xl text-4xl title-font font-medium mb-1 text-yellow-400">{{ data.business_name }}</h1>
+          <h2 class="text-xs title-font tracking-widest">{{ data.category_name }}</h2>
+          <h1 class="text-2xl title-font font-medium mb-1 text-yellow-400">{{ data.business_name }}</h1>
           <div class="flex mb-4">
             <span class="flex items-center">
               <span class="material-symbols-outlined cursor-pointer" @click="showPhoneNumbers">call</span>
@@ -54,13 +54,14 @@
           </div>
         </div>
       </div>
+      <customer-images :list="customerImages"></customer-images>
     </div>
   </section>
   <div class="absolute w-full h-full top-0 z-30 left-0 right-0 bg-gray-900 bg-opacity-75 m-auto overflow-auto"
     @click="hidePhoneNumbers" v-if="showPhoneNumber">
     <div class="bg-gray-900 border border-gray-200 w-[calc(100%-20px)] max-w-md rounded-md m-auto mt-32 p-4"
       @click.stop="">
-      <div class="text-gray-200 text-center text-2xl mb-4 font-bold">Phone Numbers</div>
+      <div class="text-gray-200 text-center text-xl mb-4 font-bold">Phone Numbers</div>
       <a class="text-gray-200 flex items-center justify-between p-2 m-2 border-gray-200" :href="'tel://' + item"
         v-for="(item, key, index) in data.ph_no" :key="index">
         <div class="flex">
@@ -80,6 +81,7 @@
 
 <script>
 import apiService from '@/services/apiService'
+import customerImages from './components/customerImages.vue' 
 export default {
   name: 'BusinessDetails',
   data() {
@@ -88,12 +90,14 @@ export default {
       data: {},
       showPhoneNumber: false,
       copied: 0,
-      images: []
+      images: [],
+      customerImages: []
     }
   },
   props: {
   },
   components: {
+    customerImages
   },
   created() {
     this.id = this.$route.params.id
@@ -122,6 +126,7 @@ export default {
       if (this.id) {
         let response = await apiService.get('/businessDetails', { business_id: this.id })
         this.data = response?.data[0][0]
+        this.customerImages = response?.data[1]
       }
     },
     async getImagesById() {
