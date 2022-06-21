@@ -16,17 +16,25 @@
       <div class=" px-2">
         <v-input placeholder="Enter Business Name" prefixIcon="store" size="small" label="Business Name"></v-input>
       </div>
+      <div class="lg:w-1/2 w-full px-2 mt-8 inline-block">
+        <v-input placeholder="Select Category" prefixIcon="category" size="small" label="Category"></v-input>
+      </div>
       <div class="px-2 mt-8 lg:w-1/2 w-full inline-block">
         <v-input placeholder="Enter Owner Name" prefixIcon="person" size="small" label="Owner Name"></v-input>
       </div>
       <div class="lg:w-1/2 w-full px-2 mt-8 inline-block">
-        <v-input placeholder="Enter Mobile Number" prefixIcon="call" size="small" label="Mobile No"></v-input>
+        <v-input placeholder="Enter Mobile Number" prefixIcon="call" size="small" label="Mobile No 1"></v-input>
+      </div>
+      <div class="lg:w-1/2 w-full px-2 mt-8 inline-block">
+        <v-input placeholder="Enter Mobile Number" prefixIcon="call" size="small" label="Mobile No 2"></v-input>
       </div>
       <div class="lg:w-1/2 w-full px-2 mt-8 inline-block">
         <v-input placeholder="Enter Email Address" prefixIcon="alternate_email" size="small" label="Email"></v-input>
       </div>
       <div class="lg:w-1/2 w-full px-2 mt-8 inline-block">
-        <v-input placeholder="Select City" prefixIcon="map" size="small" label="City"></v-input>
+        <v-select class="" label="City" @textChanged="getLocationData" @change="locationChanged" placeholder="Select City"
+      prefixIcon="pin_drop" v-model="locationId" :list="locations" item-text="location_name" item-value="location_id"
+      size="small"></v-select>
       </div>
       <div class="px-2 mt-8">
         <v-textarea placeholder="Enter Address" size="small" label="Address"></v-textarea>
@@ -42,6 +50,8 @@
 import VInput from '@/components/vInput.vue'
 import vTextarea from '@/components/vTextarea.vue'
 import SearchIcon from '@/assets/illustrations/searchIcon.vue'
+import vSelect from '@/components/vSelect.vue'
+import apiService from '@/services/apiService'
 export default {
   name: 'AddBusiness',
   props: {
@@ -49,7 +59,25 @@ export default {
   components: {
     VInput,
     vTextarea,
-    SearchIcon
+    SearchIcon,
+    vSelect
+  },
+  data() {
+    return {
+      locationId: '',
+      locations: [],
+    }
+  },
+  created() {
+    this.getLocationData('')
+  },
+  methods:{
+    async getLocationData(search) {
+      if (typeof search == "string") {
+        let response = await apiService.get('/locations', { search: search })
+        this.locations = response?.data[0]
+      }
+    }
   }
 }
 </script>

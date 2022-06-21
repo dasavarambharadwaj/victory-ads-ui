@@ -20,7 +20,7 @@
           <div class="flex mb-4">
             <span class="flex items-center">
               <span class="material-symbols-outlined cursor-pointer" @click="showPhoneNumbers">call</span>
-              <span class="material-symbols-outlined ml-4 cursor-pointer">mail</span>
+              <span class="material-symbols-outlined ml-4 cursor-pointer" v-if="data.email" @click="showEmails">mail</span>
               <span class="material-symbols-outlined ml-4 cursor-pointer">pin_drop</span>
               <span class="material-symbols-outlined ml-4 cursor-pointer">language</span>
             </span>
@@ -77,6 +77,25 @@
       </a>
     </div>
   </div>
+  <div class="absolute w-full h-full top-0 z-30 left-0 right-0 bg-gray-900 bg-opacity-75 m-auto overflow-auto"
+    @click="hideEmail" v-if="showEmail">
+    <div class="bg-gray-900 border border-gray-200 w-[calc(100%-20px)] max-w-md rounded-md m-auto mt-32 p-4"
+      @click.stop="">
+      <div class="text-gray-200 text-center text-xl mb-4 font-bold">Email Address</div>
+      <a class="text-gray-200 flex items-center justify-between p-2 m-2 border-gray-200">
+        <div class="flex">
+          <span class="mr-4">1. </span>
+          <span class="select-all">{{ data.email }}</span>
+        </div>
+        <div class="relative flex items-center">
+          <span class="material-symbols-outlined cursor-pointer mr-4" v-if="!copiedEmail"
+            @click.prevent="copyEmail()">content_copy</span>
+          <span class="material-symbols-outlined cursor-pointer mr-4 text-green-500"
+            v-if="copiedEmail">check_circle</span>
+        </div>
+      </a>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -89,8 +108,10 @@ export default {
       id: null,
       data: {},
       showPhoneNumber: false,
+      showEmail: false,
       copied: 0,
       images: [],
+      copiedEmail: false,
       customerImages: []
     }
   },
@@ -115,12 +136,26 @@ export default {
         this.copied = 0
       }, 2000);
     },
+    copyEmail() {
+      navigator.clipboard.writeText(this.data.email)
+      this.copiedEmail = true;
+      setTimeout(() => {
+        this.copiedEmail = false
+      }, 2000);
+    },
     async showPhoneNumbers() {
-      console.log(this.data)
       this.showPhoneNumber = true
     },
     hidePhoneNumbers() {
       this.showPhoneNumber = false
+    },
+    async showEmails() {
+      if(this.data.email) {
+        this.showEmail = true
+      }
+    },
+    hideEmail() {
+      this.showEmail = false
     },
     async getBusinessDetailsById() {
       if (this.id) {
