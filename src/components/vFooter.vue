@@ -5,7 +5,11 @@
       <span>Sangareddy</span>
     </router-link>
     <p class="py-2 text-gray-200 sm:py-0">2022 &#169; All rights reserved</p>
-    <p class="py-2 text-gray-200 sm:py-0">Terms &amp; conditions</p>
+    <p class="py-2 text-gray-200 sm:py-0">
+      <router-link to="/terms-and-conditions" class="flex flex-col items-center">
+        Terms &amp; conditions
+      </router-link>
+      </p>
   </footer>
 </template>
 <script>

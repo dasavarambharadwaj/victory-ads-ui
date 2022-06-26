@@ -6,6 +6,7 @@ import CategoriesPage from "@/pages/categoryList";
 import SubCategoryPage from "@/pages/category";
 import BusinessDetails from "@/pages/businessDetails";
 import PageNotFound from "@/pages/notFound";
+import TermsAndConditions from '@/pages/termsAndConditions'
 
 const routes = [
   {
@@ -17,6 +18,11 @@ const routes = [
     path: "/about",
     name: "About",
     component: AboutPage,
+  },
+  {
+    path: "/terms-and-conditions",
+    name: "Terms&Conditions",
+    component: TermsAndConditions,
   },
   {
     path: "/category-list",

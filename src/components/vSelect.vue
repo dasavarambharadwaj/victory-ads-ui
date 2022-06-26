@@ -1,6 +1,6 @@
 <template>
   <div class="w-full relative" v-click-outside="closeDropdown">
-    <VInput v-model="showValue" @change="textChange" :size="size" :key="refreshInputField" @click="openDropdown"
+    <VInput :modelValue="showValue" @change="textChange" :size="size" :key="refreshInputField" @click="openDropdown"
       :placeholder="placeholder" :label="label" :prefixIcon="prefixIcon"
       :suffixIcon="showDropdown ? 'arrow_drop_up' : 'arrow_drop_down'"></VInput>
     <div v-if="showDropdown" @input="showDropdown"
@@ -74,8 +74,8 @@ export default {
       this.showDropdown = false;
       this.refreshInputField++;
     },
-    textChange() {
-      this.$emit('textChanged', this.showValue)
+    textChange(text) {
+      this.$emit('textChanged', text)
     },
     selectionChanged(e) {
       if (e.target.dataset.value) {

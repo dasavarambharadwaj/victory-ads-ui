@@ -1,7 +1,7 @@
 <template>
   <div
     class="max-w-screen-2xl mb-8 mt-24 px-8 grid gap-8 grid-cols-1 lg:grid-cols-2 md:px-12 lg:px-16 xl:px-32 py-16 mx-auto bg-blue-900 text-gray-200 rounded-lg shadow-lg">
-    <div class="flex flex-col justify-between">
+    <div class="flex flex-col">
       <div>
         <h2 class="text-2xl text-yellow-400 font-bold leading-tight text-center">Contact Us</h2>
         <div class="mt-8 text-sm text-center">
@@ -17,29 +17,33 @@
       <div>
         <v-input size="small" :required="true" placeholder="Your Name" prefixIcon="person" v-model="model.name"
           @change="validate('name')" label="Name"></v-input>
-        <p v-if="validations.name" class="text-red-900 rounded-md bg-red-400 pl-3 font-light">
+        <p v-if="validations.name" class="text-white relative rounded-md bg-red-500 pl-3 font-light">
           {{ validations.name }}
+          <span class="absolute bottom-[90%] border-l-8 border-l-transparent border-r-8 border-r-transparent border-b-8 border-b-red-500 left-1/2"></span>
         </p>
       </div>
       <div class="mt-8">
         <v-input size="small" placeholder="Your Email Address" v-model="model.email" @change="() => { validate('email') }"
           prefixIcon="alternate_email" label="Email"></v-input>
-        <p v-if="validations.email" class="text-red-900 rounded-md bg-red-400 pl-3 font-light">
+        <p v-if="validations.email" class="text-white relative rounded-md bg-red-500 pl-3 font-light">
           {{ validations.email }}
+          <span class="absolute bottom-[90%] border-l-8 border-l-transparent border-r-8 border-r-transparent border-b-8 border-b-red-500 left-1/2"></span>
         </p>
       </div>
       <div class="mt-8">
         <v-input size="small" :required="true" placeholder="Your Mobile Number" v-model="model.phone"
           @change="() => { validate('phone') }" prefixIcon="call" label="Mobile"></v-input>
-        <p v-if="validations.phone" class="text-red-900 rounded-md bg-red-400 pl-3 font-light">
+        <p v-if="validations.phone" class="text-white relative rounded-md bg-red-500 pl-3 font-light">
           {{ validations.phone }}
+          <span class="absolute bottom-[90%] border-l-8 border-l-transparent border-r-8 border-r-transparent border-b-8 border-b-red-500 left-1/2"></span>
         </p>
       </div>
       <div class="mt-8">
         <v-textarea size="small" :required="true" placeholder="Your Query..." v-model="model.query"
           @change="() => { validate('query') }" label="How can we help?"></v-textarea>
-        <p v-if="validations.query" class="text-red-900 rounded-md bg-red-400 pl-3 font-light">
+        <p v-if="validations.query" class="text-white relative rounded-md bg-red-500 pl-3 font-light">
           {{ validations.query }}
+          <span class="absolute bottom-[90%] border-l-8 border-l-transparent border-r-8 border-r-transparent border-b-8 border-b-red-500 left-1/2"></span>
         </p>
       </div>
       <div class="mt-8 text-center">
@@ -156,7 +160,7 @@ export default {
     },
     phoneNumberValidation(val) {
       if (val) {
-        let exp = /^[6-9]\d{9}$/
+        let exp = /^(\+91[-\s]?)?[0]?(91)?[789]\d{9}$/
         let res = exp.test(val)
         if (!res) {
           return "This number is invalid"

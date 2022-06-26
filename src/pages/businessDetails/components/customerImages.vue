@@ -1,27 +1,19 @@
 <template>
-  <div class="p-2 bg-gray-800 rounded-lg shadow" v-if="list.length > 0">
-    <div class="flex flex-wrap justify-center">
-      <div class="p-2 w-full md:w-1/2 lg:w-1/4" v-for="item in list" :key="item">
-        <div class="flex justify-center items-center">
-          <div class="flex-shrink-0">
-            <a class="block relative">
-              <img alt="profil" :src="getUrlByName(item.image_location)"
-                class="mx-auto object-cover rounded-md h-32 w-20 " />
-            </a>
-          </div>
-          <div class="mt-2 w-1/2 flex flex-col ml-4">
-            <span class="text-white text-lg break-words font-medium">
-              {{item.customer_name}}
-            </span>
-            <span class="text-gray-400 break-words text-xs">
-              {{item.customer_role}}
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div>
+    <section class="py-6 dark:bg-gray-800 dark:text-gray-100" v-if="list.length > 0">
+		<div class="container p-4 mx-auto space-y-16 sm:p-10">
+			<div class="grid w-full grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+				<div class="space-y-4" v-for="item in list" :key="item">
+					<img class="object-cover h-56 mx-auto mb-4 bg-center rounded-sm dark:bg-gray-500" alt="profile" :src="getUrlByName(item.image_location)">
+					<div class="flex flex-col items-center">
+						<h4 class="text-xl font-semibold">{{item.customer_name}}</h4>
+						<p class="text-sm dark:text-gray-400">{{item.customer_role}}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
   </div>
-
 </template>
 <script>
 export default {
