@@ -12,19 +12,21 @@
   </div>
 </template>
 <script>
-import { Ad_1, Ad_2 } from '@/scrollAds'
+import { Ad_1, Ad_2, Ad_3 } from '@/scrollAds'
 export default {
   name: "VCarousel",
   components: {
     Ad_1,
-    Ad_2
+    Ad_2,
+    Ad_3
   },
   data() {
     return {
       showIndex: 0,
       ads: [
         'Ad_1',
-        'Ad_2'
+        'Ad_2',
+        'Ad_3'
       ],
       slideInverval: null
     }

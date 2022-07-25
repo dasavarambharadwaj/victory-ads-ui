@@ -4,23 +4,23 @@
       <img class="h-full m-auto" :src="getUrlByName(data.UI_config?.logo)" alt="test" />
     </div>
     
-    <h1 class="text-2xl title-font flex justify-center font-medium mb-1 text-yellow-400">{{ data.business_name }}</h1>
+    <h1 class="text-2xl title-font flex justify-center text-center font-medium mb-1 text-yellow-400">{{ data.business_name }}</h1>
     <h2 class="text-xs title-font flex justify-center tracking-widest">{{ data.category_name }}</h2>
     <div class="flex justify-center my-4">
       <span class="flex items-center">
         <span class="material-symbols-outlined cursor-pointer" @click="showPhoneNumbers">call</span>
-        <span class="material-symbols-outlined ml-4 cursor-pointer" v-if="data.email" @click="showEmails">mail</span>
-        <span class="material-symbols-outlined ml-4 cursor-pointer">pin_drop</span>
-        <span class="material-symbols-outlined ml-4 cursor-pointer">language</span>
+        <span class="material-symbols-outlined ml-4 cursor-pointer" :class="{'opacity-30':!data.email}" @click="showEmails">mail</span>
+        <span class="material-symbols-outlined ml-4 cursor-pointer" :class="{'opacity-30':!data.coordinates}">pin_drop</span>
+        <a class="material-symbols-outlined ml-4 cursor-pointer" :class="{'opacity-30':!data.UI_config?.website}" :href="data.UI_config?.website" target="_blank">language</a>
       </span>
       <span class="flex ml-3 pl-3 py-2 border-l-2 border-gray-200">
-        <a class="">
+        <a :class="{'opacity-30':!data.UI_config?.fb}">
           <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
             viewBox="0 0 24 24">
             <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
           </svg>
         </a>
-        <a class="ml-2 ">
+        <a class="ml-2" :class="{'opacity-30':!data.UI_config?.twitter}">
           <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
             viewBox="0 0 24 24">
             <path
@@ -36,7 +36,7 @@
       </p>
     </span>
     <div>
-      <div class="relative flex items-center justify-center w-full dark:text-gray-50">
+      <div class="relative flex items-center justify-center w-full dark:text-gray-50" v-if="images.length > 0">
 		<button aria-label="Slide back" type="button" @click="scrollImageLeft" class="absolute leading-none left-0 z-30 p-2 ml-10 focus:outline-none text-gray-900 rounded-full bg-gray-200 focus:dark:bg-gray-400 focus:ring-2 focus:ring-offset-2 focus:ring-gray-400">
 			<span class="material-symbols-outlined">chevron_left</span>
 		</button>
@@ -50,30 +50,20 @@
 		</button>
 	</div>
     </div>
-    <div class="bg-gray-800 rounded-md my-2 md:m-12">
-      <h1 class="text-xl font-bold text-center m-4">Products & Services</h1>
+    <div class="bg-gray-800 rounded-md my-2 md:m-12" v-if="data.UI_config?.info">
       <div class="p-5">
         <p class="text-center">
           {{ data.UI_config?.info }}
         </p>
       </div>
+      <div class="flex justify-center flex-col items-center pb-5">
+        <h2 class="text-lg font-bold m-auto" v-if="data.UI_config?.pointsHeading">{{data.UI_config?.pointsHeading}}</h2>
+        <ul class="list-disc list-inside text-base" v-if="data.UI_config?.points">
+          <li v-for="(point,index) in data.UI_config?.points" :key="index">{{point}}</li>
+        </ul>
+      </div>
     </div>
     <customer-images :list="customerImages"></customer-images>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   </div>
   <div class="absolute w-full h-full top-0 z-30 left-0 right-0 bg-gray-900 bg-opacity-75 m-auto overflow-auto"
     @click="hidePhoneNumbers" v-if="showPhoneNumber">

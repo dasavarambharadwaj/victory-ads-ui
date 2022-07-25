@@ -1,14 +1,12 @@
 <template>
+<router-link to="/business-details/10115" class="flex flex-col items-center">
   <div class="w-full">
-    <div class="flex-row m-auto w-full  bg-white justify-center border border-gray-200 p-2 flex ">
-      <div class="h-40 md:h-60 lg:h-80 rounded-md flex items-center">
-        <img alt="victory ads proprietor" class="rounded-md h-[85%] sm:h-[95%]" src="@/assets/images/victoryAds.jpeg"/>
-        <img alt="victory ads visiting card" class="rounded-md h-[85%] sm:h-[95%] flex-shrink" src="@/assets/images/victoryAdsCard.jpeg"/>
-      </div>
-      <div class="flex flex-col">
-      </div>
+    <div class="relative flex flex-shrink-0 bg-gray-400 w-full max-w-5xl m-auto sm:w-auto">
+      <img alt="filling station" class="block sm:hidden m-auto max-h-full max-w-full" src="@/assets/images/filling_station.jpeg"/>
+      <img alt="filling station" class="hidden sm:block m-auto max-h-full max-w-full" src="@/assets/images/filling_station_sm.jpeg"/>
     </div>
   </div>
+  </router-link>
 </template>
 <script>
 
