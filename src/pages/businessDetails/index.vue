@@ -10,7 +10,7 @@
       <span class="flex items-center">
         <span class="material-symbols-outlined cursor-pointer" @click="showPhoneNumbers">call</span>
         <span class="material-symbols-outlined ml-4 cursor-pointer" :class="{'opacity-30':!data.email}" @click="showEmails">mail</span>
-        <span class="material-symbols-outlined ml-4 cursor-pointer" :class="{'opacity-30':!data.coordinates}">pin_drop</span>
+        <a class="material-symbols-outlined ml-4 cursor-pointer" :class="{'opacity-30':!data.co_ordinates}" :href="data.co_ordinates" target="_blank">pin_drop</a>
         <a class="material-symbols-outlined ml-4 cursor-pointer" :class="{'opacity-30':!data.UI_config?.website}" :href="data.UI_config?.website" target="_blank">language</a>
       </span>
       <span class="flex ml-3 pl-3 py-2 border-l-2 border-gray-200">
@@ -41,8 +41,8 @@
 			<span class="material-symbols-outlined">chevron_left</span>
 		</button>
 		<div class="flex items-center w-full h-full gap-2 py-4 m-auto image-wrapper scroll-smooth overflow-auto">
-			<div class="relative flex h-96 aspect-square flex-shrink-0 bg-white w-full sm:w-auto" v-for="(item, index) in images" :key="index">
-				<img class="m-auto max-h-full max-w-full" :src="getUrlByName(item.image_location)" :alt="item.image_name">
+			<div class="relative flex h-96 aspect-square rounded-md flex-shrink-0 bg-white w-full sm:w-auto" v-for="(item, index) in images" :key="index">
+				<img class="m-auto max-h-full max-w-full rounded-md" :src="getUrlByName(item.image_location)" :alt="item.image_name">
 			</div>
 		</div>
 		<button aria-label="Slide forward" id="next" @click="scrollImageRight" class="absolute leading-none right-0 z-30 p-2 mr-10 focus:outline-none text-gray-900 rounded-full bg-gray-200 focus:dark:bg-gray-400 focus:ring-2 focus:ring-offset-2 focus:ring-gray-400">
@@ -58,8 +58,8 @@
       </div>
       <div class="flex justify-center flex-col items-center pb-5">
         <h2 class="text-lg font-bold m-auto" v-if="data.UI_config?.pointsHeading">{{data.UI_config?.pointsHeading}}</h2>
-        <ul class="list-disc list-inside text-base" v-if="data.UI_config?.points">
-          <li v-for="(point,index) in data.UI_config?.points" :key="index">{{point}}</li>
+        <ul class="list-disc list-inside text-base pl-3" v-if="data.UI_config?.points">
+          <li class=" max-w-2xl" v-for="(point,index) in data.UI_config?.points" :key="index">{{point}}</li>
         </ul>
       </div>
     </div>

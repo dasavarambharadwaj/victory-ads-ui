@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full">
+  <div class="w-full rounded-md">
     <div class="relative w-full transition-all delay-500" @mousedown="sliderStop" @mouseup="sliderStart"
       v-for="(item, index) in ads" :key="index" v-show="showIndex === index">
       <component :is="item"></component>
@@ -12,13 +12,14 @@
   </div>
 </template>
 <script>
-import { Ad_1, Ad_2, Ad_3 } from '@/scrollAds'
+import { Ad_1, Ad_2, Ad_3,Ad_4 } from '@/scrollAds'
 export default {
   name: "VCarousel",
   components: {
     Ad_1,
     Ad_2,
-    Ad_3
+    Ad_3,
+    Ad_4
   },
   data() {
     return {
@@ -26,7 +27,8 @@ export default {
       ads: [
         'Ad_1',
         'Ad_2',
-        'Ad_3'
+        'Ad_3',
+        'Ad_4'
       ],
       slideInverval: null
     }

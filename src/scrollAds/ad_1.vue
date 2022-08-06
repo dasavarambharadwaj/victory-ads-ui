@@ -1,6 +1,6 @@
 <template>
 	<div class="w-full">
-		<div class="relative justify-center flex flex-shrink-0 bg-red-300 w-full max-w-5xl aspect-video sm:aspect-[3/1] m-auto sm:w-auto">
+		<div class="relative justify-center flex flex-shrink-0 bg-red-300 w-full max-w-5xl aspect-video sm:aspect-[3/1] m-auto sm:w-auto rounded-md">
 			<div class="justify-center items-center p-2 flex ">
 				<div class="h-5/6">
 					<announce-icon></announce-icon>
