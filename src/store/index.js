@@ -1,24 +1,34 @@
-import { createStore } from 'vuex'
+import { createStore } from "vuex";
 
 // Create a new store instance.
 const store = createStore({
-  state () {
+  state() {
     return {
       location: "",
       location_id: null,
       showLocationPopup: false,
-    }
+    };
   },
   mutations: {
-    setLocation(state,location) {
-        state.location = location
+    setLocation(state, location) {
+      state.location = location;
+      try{
+        localStorage.setItem("location",location)
+      } catch(e) {
+        console.log("Unable to access local storage")
+      }
     },
-    setLocationId(state,location_id) {
-      state.location_id = location_id
+    setLocationId(state, location_id) {
+      state.location_id = location_id;
+      try{
+        localStorage.setItem("location_id",location_id)
+      } catch(e) {
+        console.log("Unable to access local storage")
+      }
     },
-    setshowLocationPopup(state,show) {
-      state.showLocationPopup = show
-    }
-  }
-})
+    setshowLocationPopup(state, show) {
+      state.showLocationPopup = show;
+    },
+  },
+});
 export default store;

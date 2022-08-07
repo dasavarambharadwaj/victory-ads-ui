@@ -2,10 +2,11 @@ import { createWebHistory, createRouter } from "vue-router";
 import HomePage from "@/pages/home";
 import AboutPage from "@/pages/about";
 import AddBusinessPage from "@/pages/addBusiness";
-import CategoriesPage from '@/pages/categoryList';
-import SubCategoryPage from '@/pages/category';
-import BusinessDetails from '@/pages/businessDetails';
-import PageNotFound from '@/pages/notFound'
+import CategoriesPage from "@/pages/categoryList";
+import SubCategoryPage from "@/pages/category";
+import BusinessDetails from "@/pages/businessDetails";
+import PageNotFound from "@/pages/notFound";
+import TermsAndConditions from '@/pages/termsAndConditions'
 
 const routes = [
   {
@@ -17,6 +18,11 @@ const routes = [
     path: "/about",
     name: "About",
     component: AboutPage,
+  },
+  {
+    path: "/terms-and-conditions",
+    name: "Terms&Conditions",
+    component: TermsAndConditions,
   },
   {
     path: "/category-list",
@@ -39,18 +45,18 @@ const routes = [
     component: AddBusinessPage,
   },
   {
-    path:'/:pathMatch(.*)*',
-    component:PageNotFound
-  }
+    path: "/:pathMatch(.*)*",
+    component: PageNotFound,
+  },
 ];
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
   scrollBehavior() {
-    let container = document.querySelector(".router-scroll-container")
-    if(container) {
-      container.scrollTop = 0
+    let container = document.querySelector(".router-scroll-container");
+    if (container) {
+      container.scrollTop = 0;
     }
   },
 });
