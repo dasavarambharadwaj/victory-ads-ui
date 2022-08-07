@@ -5,7 +5,7 @@
     </div>
     
     <h1 class="text-2xl title-font flex justify-center text-center font-medium mb-1 text-yellow-400">{{ data.business_name }}</h1>
-    <h2 class="text-xs title-font flex justify-center tracking-widest">{{ data.category_name }}</h2>
+    <h2 class="text-xs title-font flex justify-center tracking-widest cursor-pointer" @click="categorySelected">{{ data.category_name }}</h2>
     <div class="flex justify-center my-4">
       <span class="flex items-center">
         <span class="material-symbols-outlined cursor-pointer" @click="showPhoneNumbers">call</span>
@@ -56,11 +56,19 @@
           {{ data.UI_config?.info }}
         </p>
       </div>
-      <div class="flex justify-center flex-col items-center pb-5">
-        <h2 class="text-lg font-bold m-auto" v-if="data.UI_config?.pointsHeading">{{data.UI_config?.pointsHeading}}</h2>
-        <ul class="list-disc list-inside text-base pl-3" v-if="data.UI_config?.points">
+      <div class="flex mb-4 lg:flex-row flex-col gap-4 p-2 justify-center">
+      <div class="flex flex-col p-4 max-w-lg w-full rounded-md mb-4 mx-auto text-gray-900 pb-5 lg:mx-5 bg-purple-200">
+        <h2 class="text-lg font-bold mx-auto text-purple-900" v-if="data.UI_config?.pointsHeading">{{data.UI_config?.pointsHeading}}</h2>
+        <ul class="list-disc list-outside marker:text-purple-900 text-base pl-10 max-h-80 overflow-y-auto" v-if="data.UI_config?.points">
           <li class=" max-w-2xl" v-for="(point,index) in data.UI_config?.points" :key="index">{{point}}</li>
         </ul>
+      </div>
+      <div v-if="data.UI_config?.pointsHeading2" class="flex flex-col text-gray-900 p-4 max-w-lg w-full mb-4 mx-auto rounded-md pb-5 lg:mx-5 bg-purple-200">
+        <h2 class="text-lg font-bold mx-auto text-purple-900" v-if="data.UI_config?.pointsHeading2">{{data.UI_config?.pointsHeading2}}</h2>
+        <ul class="list-disc marker:text-purple-900 list-outside text-base pl-10 max-h-80 overflow-y-auto" v-if="data.UI_config?.points2">
+          <li class=" max-w-2xl" v-for="(point,index) in data.UI_config?.points2" :key="index">{{point}}</li>
+        </ul>
+      </div>
       </div>
     </div>
     <customer-images :list="customerImages"></customer-images>
@@ -134,6 +142,9 @@ export default {
     this.getImagesById()
   },
   methods: {
+    categorySelected() {
+      this.$router.push({ name: 'Category', params: { id: this.data.category_id, name: this.data.category_name } })
+    },
     scrollImageLeft() {
       const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
       let content = document.querySelector(".image-wrapper");

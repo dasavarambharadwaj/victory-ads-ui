@@ -42,6 +42,7 @@ export default {
   },
   computed: mapState([
     'location',
+    'location_id',
     'showLocationPopup'
   ]),
   created() {
@@ -49,6 +50,8 @@ export default {
   },
   methods: {
     checkLocation() {
+      this.$store.commit('setLocation', localStorage.getItem("location") || this.location)
+      this.$store.commit('setLocationId', localStorage.getItem("location_id") || this.location_id)
       this.$store.commit('setshowLocationPopup', this.location === "")
       this.refreshComponent += 1
     }
