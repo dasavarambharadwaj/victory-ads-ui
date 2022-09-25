@@ -50,13 +50,13 @@
 		</button>
 	</div>
     </div>
-    <div class="bg-gray-800 rounded-md my-2 md:m-12" v-if="data.UI_config?.info">
-      <div class="p-5">
+    <div class="bg-gray-800 rounded-md my-2 md:m-12">
+      <div class="p-5" v-if="data.UI_config?.info">
         <p class="text-center">
           {{ data.UI_config?.info }}
         </p>
       </div>
-      <div class="flex mb-4 lg:flex-row flex-col gap-4 p-2 justify-center">
+      <div v-if="data.UI_config?.pointsHeading" class="flex mb-4 lg:flex-row flex-col gap-4 p-2 justify-center">
       <div class="flex flex-col p-4 max-w-lg w-full rounded-md mb-4 mx-auto text-gray-900 pb-5 lg:mx-5 bg-purple-200">
         <h2 class="text-lg font-bold mx-auto text-purple-900" v-if="data.UI_config?.pointsHeading">{{data.UI_config?.pointsHeading}}</h2>
         <ul class="list-disc list-outside marker:text-purple-900 text-base pl-10 max-h-80 overflow-y-auto" v-if="data.UI_config?.points">

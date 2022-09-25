@@ -7,7 +7,7 @@
 					<img class="object-cover h-56 mx-auto mb-4 bg-center dark:bg-gray-500 rounded-md" alt="profile" :src="getUrlByName(item.image_location)">
 					<div class="flex flex-col items-center">
 						<h4 class="text-xl font-semibold">{{item.customer_name}}</h4>
-						<p class="text-sm dark:text-gray-400">{{item.customer_role}}</p>
+						<p class="text-sm dark:text-gray-400 text-center">{{item.customer_role}}</p>
 					</div>
 				</div>
 			</div>

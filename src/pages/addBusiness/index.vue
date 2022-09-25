@@ -1,6 +1,6 @@
 <template>
   <div
-    class=" max-w-screen-2xl mt-24 mb-8 px-8 grid gap-8 grid-cols-1 lg:grid-cols-2 md:px-12 lg:px-16 xl:px-32 py-16 mx-auto bg-blue-900 text-gray-200 rounded-lg shadow-lg">
+    class=" max-w-screen-2xl mt-2 mb-8 px-8 grid gap-8 grid-cols-1 lg:grid-cols-2 md:px-12 lg:px-16 xl:px-32 py-16 mx-auto backdrop-blur bg-green-600/30 text-gray-200 rounded-lg shadow-lg">
     <div class="flex flex-col">
       <div>
         <h2 class="text-2xl text-yellow-400 font-bold leading-tight text-center">Add Business</h2>

@@ -21,7 +21,7 @@
     </div>
     <v-select class="" @textChanged="getLocationData" @change="locationChanged" placeholder="Select Location"
       prefixIcon="pin_drop" v-model="locationId" :list="locations" item-text="location_name" item-value="location_id"
-      size="medium"></v-select>
+      size="small"></v-select>
       </div>
       </div>
   </div>
@@ -49,20 +49,25 @@ export default {
     this.loading = true
     this.$store.commit('setLocation', '')
     this.$store.commit('setLocationId', null)
-    await this.getLocationData('')
-    let data = await this.getGeoLocation()
-    if(data) {
-      this.locationEnabled = true
-      let cityDistances = this.findNearestLocation(data.coords.latitude, data.coords.longitude)
-      cityDistances = cityDistances.filter(item => item.distance < 10)
-      cityDistances = cityDistances.sort((a,b)=> a.distance - b.distance)
-      if(cityDistances.length > 0) {
-        this.nearestCity = cityDistances[0].city
-      } else {
-        this.nearestCity = {}
+    try {
+      await this.getLocationData('')
+      let data = await this.getGeoLocation()
+      if(data) {
+        this.locationEnabled = true
+        let cityDistances = this.findNearestLocation(data.coords.latitude, data.coords.longitude)
+        cityDistances = cityDistances.filter(item => item.distance < 10)
+        cityDistances = cityDistances.sort((a,b)=> a.distance - b.distance)
+        if(cityDistances.length > 0) {
+          this.nearestCity = cityDistances[0].city
+        } else {
+          this.nearestCity = {}
+        }
       }
+      this.loading = false
+    } catch(e) {
+      this.locationEnabled = false
+      this.loading = false
     }
-    this.loading = false
   },
   methods: {
     findNearestLocation(latitude,longitude) {
@@ -91,15 +96,18 @@ export default {
       }
     },
     getGeoLocation() {
-      if(navigator.geolocation) {
-        return new Promise((resolve)=>{
-          navigator.geolocation.getCurrentPosition((position)=>{
-            resolve(position)
-          },()=>{
+      if (navigator.geolocation) {
+        return new Promise((resolve) => {
+          try {
+            navigator.geolocation.getCurrentPosition((position) => {
+              resolve(position)
+            }, () => {
+              resolve(null)
+            })
+          } catch (e) {
             resolve(null)
-          })
+          }
         })
-        
       }
     },
     async getLocationData(search) {
