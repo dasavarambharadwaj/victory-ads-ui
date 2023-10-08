@@ -6,7 +6,7 @@ import CategoriesPage from "@/pages/categoryList";
 import SubCategoryPage from "@/pages/category";
 import BusinessDetails from "@/pages/businessDetails";
 import PageNotFound from "@/pages/notFound";
-import TermsAndConditions from '@/pages/termsAndConditions'
+import TermsAndConditions from "@/pages/termsAndConditions";
 
 const routes = [
   {

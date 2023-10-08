@@ -1,24 +1,3 @@
 # victory ads UI
 
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Welcome to the UI repository of Victory ads. This repository contains the front-end codebase for the [victory ads](victoryads-srd.in) website, which is currently inactive. The website was built to serve as a platform for Victory Ads to showcase their services, products, and other relevant information.
