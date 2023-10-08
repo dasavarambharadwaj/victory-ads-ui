@@ -5,9 +5,9 @@
 </template>
 <script>
 export default {
-  name: 'VLink',
+  name: "VLink",
   props: {
-    href: String
-  }
-}
+    href: String,
+  },
+};
 </script>

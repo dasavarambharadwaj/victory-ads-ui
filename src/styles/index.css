@@ -2,8 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-
 .required:after {
-  content:" *";
+  content: " *";
   @apply text-gray-200;
 }
